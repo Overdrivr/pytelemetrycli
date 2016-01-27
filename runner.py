@@ -1,5 +1,6 @@
 import threading
 import time
+
 # Main class
 class Runner:
     def __init__(self, transport, telemetry):
@@ -14,7 +15,6 @@ class Runner:
         self.connected.clear()
 
     def connect(self,options):
-        print("Connecting to...",options)
         self.transport.connect(options)
         self.connected.set()
         self.thread = threading.Thread(target=self.run)
@@ -26,6 +26,7 @@ class Runner:
 
     def terminate(self):
         self.running.clear()
+        self.thread.join()
         try:
             self.transport.disconnect()
         except:
