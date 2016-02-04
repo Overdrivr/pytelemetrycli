@@ -1,8 +1,6 @@
 class Topics:
-    def __init__(self, telemetry):
+    def __init__(self):
         self.topics = dict()
-        self.telemetry = telemetry
-        telemetry.subscribe(None,self.process)
 
     def process(self,topic, payload):
         if not topic in self.topics:
@@ -15,7 +13,7 @@ class Topics:
     def samples(self,topic,amount=1):
         if not topic in self.topics:
             return None
-        if amount == 0:
+        if amount == 0 or amount is None:
             return self.topics[topic]
         return self.topics[topic][-amount:]
 
