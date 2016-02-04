@@ -6,6 +6,8 @@ import runner
 import topics
 import pytelemetry.pytelemetry as tm
 import pytelemetry.transports.serialtransport as transports
+from ui import Plot
+import numpy as np
 
 class Console(cmd.Cmd):
 
@@ -23,13 +25,17 @@ class Console(cmd.Cmd):
 
     ## Command definitions ##
     def do_ls(self, args):
-        """Prints a list of received topics"""
+        """
+            Prints a list of received topics
+        """
         t = self.topics.ls()
         for i in t:
             print(i)
 
     def do_print(self, args):
-        """Prints X last received samples on a given topic"""
+        """
+            Prints X last received samples on a given topic
+        """
 
         parser = argparse.ArgumentParser()
         parser.add_argument('--topic','-t', dest='topic', required=True)
@@ -40,6 +46,25 @@ class Console(cmd.Cmd):
         if s is not None:
             for i in s:
                 print(i)
+
+    def do_plot(self, args):
+        """
+            Plots a topic in a PyQtGraph plot
+        """
+        if not self.topics.exists(args):
+            print("Topic [",args,"] unknown.")
+
+        print("Plotting:", args)
+
+        plt = Plot.Plot2D()
+        data = self.topics.samples(args,amount=0)
+        data[3] = 12
+        data[5] = -4
+        print(data)
+        t = np.arange(0,len(data))
+        print(t)
+        plt.trace(args,t,data)
+        plt.start()
 
     def do_count(self, args):
         """Counts amount of received samples on a given topic"""
@@ -61,7 +86,7 @@ class Console(cmd.Cmd):
         # Parse args
         parser = argparse.ArgumentParser()
         parser.add_argument('--port','-p', dest='port', required=True)
-        parser.add_argument('--baudrate','-b', dest='baudrate', type=int, default=9600)
+        parser.add_argument('--baudrate','-b', dest='baudrate', type=int, default=115200)
         args = parser.parse_args(args.split())
 
         # Build the option dictionnary
