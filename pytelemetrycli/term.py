@@ -8,6 +8,7 @@ import pytelemetry.pytelemetry as tm
 import pytelemetry.transports.serialtransport as transports
 from ui import Plot
 import numpy as np
+from pyqtgraph.Qt import QtCore
 
 class Console(cmd.Cmd):
 
@@ -53,16 +54,23 @@ class Console(cmd.Cmd):
         """
         if not self.topics.exists(args):
             print("Topic [",args,"] unknown.")
+            return
 
         print("Plotting:", args)
 
         plt = Plot.Plot2D()
+
+        def update(plt,topics,topic):
+            data = topics.samples(topic,amount=0)
+            t = np.arange(0,len(data))
+            plt.trace(topic,t,data)
+
+        timer = QtCore.QTimer()
+        timer.timeout.connect(lambda: update(plt,self.topics,args))
+        timer.start(50)
+
         data = self.topics.samples(args,amount=0)
-        data[3] = 12
-        data[5] = -4
-        print(data)
         t = np.arange(0,len(data))
-        print(t)
         plt.trace(args,t,data)
         plt.start()
 
