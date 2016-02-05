@@ -14,7 +14,10 @@ class Runner:
         self.connected = threading.Event()
         self.connected.clear()
 
-    def connect(self,options):
+    def connect(self,port,bauds):
+        options = dict()
+        options['port'] = port
+        options['baudrate'] = bauds
         self.transport.connect(options)
         self.connected.set()
         self.thread = threading.Thread(target=self.run)
