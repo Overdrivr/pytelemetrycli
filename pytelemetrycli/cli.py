@@ -46,6 +46,15 @@ class Application (cmd.Cmd):
         self.runner = runner.Runner(self.transport,self.telemetry)
         self.telemetry.subscribe(None,self.topics.process)
 
+        self.types_lookup = {'--s'    :  'string',
+                             '--u8'   :  'uint8',
+                             '--u16'  :  'uint16',
+                             '--u32'  :  'uint32',
+                             '--i8'   :  'int8',
+                             '--i16'  :  'int16',
+                             '--i32'  :  'int32',
+                             '--f32'  :  'float32'}
+
     @docopt_cmd
     def do_serial(self, arg):
         """
@@ -57,7 +66,18 @@ Options:
 -b X, --bauds X        Connection speed in bauds  [default: 9600]
 
         """
-        print(arg)
+        try:
+            self.runner.disconnect()
+        except:
+            pass # Already disconnected
+
+        try:
+            self.runner.connect(arg['<port>'],arg['--bauds'])
+        except:
+            print("Failed to connect to :",arg['<port>']," at ",arg['--bauds']," (bauds)")
+            print("Connection error : ",sys.exc_info())
+        else:
+            print("Connected to :",arg['<port>']," at ",arg['--bauds']," (bauds)")
 
     @docopt_cmd
     def do_print(self, arg):
@@ -70,7 +90,14 @@ Options:
 -a X, --amount X        Amount of samples to display [default: 1]
 
         """
-        print(arg)
+        if not self.topics.exists(arg['<topic>']):
+            print("Topic '",arg['<topic>'],"' unknown. Type 'ls' to list all available")
+            return
+
+        s = self.topics.samples(arg['<topic>'],int(arg['--amount']))
+        if s is not None:
+            for i in s:
+                print(i)
 
     @docopt_cmd
     def do_ls(self, arg):
@@ -84,7 +111,6 @@ Options:
 -s, --serial     Use this flag to print a list of all available serial ports
 
         """
-        print(arg)
         if arg['--serial']:
             print("Available COM ports:")
             for port,desc,hid in list_ports.comports():
@@ -107,9 +133,29 @@ Usage: plot <topic>
         """
 Publishes a (value | string) on <topic>.
 
-Usage: pub <topic> <value> (-ui8 | -ui16 | -ui32 | -i8 | -i16 | -i32 | -f32 | -s)
+Usage: pub <topic> <value> (--u8 | --u16 | --u32 | --i8 | --i16 | --i32 | --f32 | --s)
         """
-        print(arg)
+
+        if arg['--f32']:
+            arg['<value>'] = float(arg['<value>'])
+        elif not arg['--s']:
+            arg['<value>'] = int(arg['<value>'])
+
+        subset = {k: arg[k] for k in ("--u8","--u16","--u32","--i8","--i16","--i32","--f32","--s")}
+
+        valtype = None
+        for i, k in subset.items():
+            if k:
+                valtype = self.types_lookup[i]
+
+        if not valtype:
+            print("Impossible to identify type of payload. pub cancelled.")
+            print(arg)
+            return
+
+        print("Published on |",arg['<topic>'],"|",arg['<value>'],"[",valtype,"]")
+
+        self.telemetry.publish(arg['<topic>'],arg['<value>'],valtype)
 
     @docopt_cmd
     def do_disconnect(self, arg):
@@ -118,15 +164,19 @@ Disconnects from any open connection.
 
 Usage: disconnect
         """
-        print(arg)
+        try:
+            self.runner.disconnect()
+            print("Disconnected.")
+        except:
+            print("Already disconnected.")
 
     def do_quit(self, arg):
         """
 Quits out of Interactive Mode.
         """
-
+        self.runner.terminate()
         print('Good Bye!')
-        exit()
+        exit()    
 
 try:
     Application().cmdloop()
