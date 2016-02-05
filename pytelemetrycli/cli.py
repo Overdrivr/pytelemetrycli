@@ -2,6 +2,11 @@
 import sys
 import cmd
 from docopt import docopt, DocoptExit
+import pytelemetry.pytelemetry as tm
+import pytelemetry.transports.serialtransport as transports
+import topics
+import runner
+from serial.tools import list_ports
 
 def docopt_cmd(func):
     def fn(self, arg):
@@ -26,10 +31,20 @@ def docopt_cmd(func):
     return fn
 
 class Application (cmd.Cmd):
-    intro = 'pytelemetry terminal started.' \
-          + ' (type help for a list of commands.)'
-    prompt = ':> '
-    file = None
+    def __init__(self):
+        # cmd Initialization and configuration
+        cmd.Cmd.__init__(self)
+        self.intro = 'pytelemetry terminal started.' \
+                 + ' (type help for a list of commands.)'
+        self.prompt = ':> '
+        self.file = None
+
+        # pytelemetry setup
+        self.transport = transports.SerialTransport()
+        self.telemetry = tm.pytelemetry(self.transport)
+        self.topics = topics.Topics()
+        self.runner = runner.Runner(self.transport,self.telemetry)
+        self.telemetry.subscribe(None,self.topics.process)
 
     @docopt_cmd
     def do_serial(self, arg):
@@ -60,11 +75,23 @@ Options:
     @docopt_cmd
     def do_ls(self, arg):
         """
-Prints a list of all received topics.
+By default, prints a list of all received topics.
+With the --serial flag, prints a list of all available COM ports
 
-Usage: ls
+Usage: ls [options]
+
+Options:
+-s, --serial     Use this flag to print a list of all available serial ports
+
         """
         print(arg)
+        if arg['--serial']:
+            print("Available COM ports:")
+            for port,desc,hid in list_ports.comports():
+                print(port,'\t',desc)
+        else:
+            for topic in self.topics.ls():
+                print(topic)
 
     @docopt_cmd
     def do_plot(self, arg):
