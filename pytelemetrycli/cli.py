@@ -180,6 +180,16 @@ Usage: pub <topic> <value> (--u8 | --u16 | --u32 | --i8 | --i16 | --i32 | --f32 
         self.telemetry.publish(arg['<topic>'],arg['<value>'],valtype)
 
     @docopt_cmd
+    def do_count(self, arg):
+        """
+Prints a count of received samples for each topic.
+
+Usage: count
+        """
+        for topic in self.topics.ls():
+            print(topic,":",self.topics.count(topic))
+
+    @docopt_cmd
     def do_disconnect(self, arg):
         """
 Disconnects from any open connection.
