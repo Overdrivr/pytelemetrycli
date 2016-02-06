@@ -7,6 +7,9 @@ import pytelemetry.transports.serialtransport as transports
 import topics
 import runner
 from serial.tools import list_ports
+from ui import Plot
+import numpy as np
+from pyqtgraph.Qt import QtCore
 
 def docopt_cmd(func):
     def fn(self, arg):
@@ -126,7 +129,26 @@ Plots <topic> in a graph window.
 
 Usage: plot <topic>
         """
-        print(arg)
+        if not self.topics.exists(arg['<topic>']):
+            print("Topic ",arg['<topic>']," unknown.")
+
+        print("Plotting:", arg['<topic>'])
+
+        plt = Plot.Plot2D()
+
+        def update(plt,topics,topic):
+            data = topics.samples(topic,amount=0)
+            t = np.arange(0,len(data))
+            plt.trace(topic,t,data)
+
+        timer = QtCore.QTimer()
+        timer.timeout.connect(lambda: update(plt,self.topics,arg['<topic>']))
+        timer.start(50)
+
+        data = self.topics.samples(arg['<topic>'],amount=0)
+        t = np.arange(0,len(data))
+        plt.trace(arg['<topic>'],t,data)
+        plt.start()
 
     @docopt_cmd
     def do_pub(self, arg):
@@ -176,7 +198,7 @@ Quits out of Interactive Mode.
         """
         self.runner.terminate()
         print('Good Bye!')
-        exit()    
+        exit()
 
 try:
     Application().cmdloop()
