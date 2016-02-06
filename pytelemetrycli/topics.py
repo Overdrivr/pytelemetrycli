@@ -20,7 +20,7 @@ class Topics:
     def count(self,topic):
         if not topic in self.topics:
             return 0
-        return count(self.topics[topic])
+        return len(self.topics[topic])
 
     def exists(self,topic):
         return topic in self.topics
