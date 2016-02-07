@@ -5,8 +5,6 @@ import pyqtgraph as pg
 from multiprocessing import Process, Manager, Queue
 import sched, time, threading
 
-# This function is responsible for displaying the data
-# it is run in its own process to liberate main process
 class Superplot():
     def __init__(self,name):
         self.name = name
@@ -24,11 +22,11 @@ class Superplot():
         self.p.join()
 
     def _update(self):
-        if not self.q.empty():
+        while not self.q.empty():
             item = self.q.get()
             self.x.append(item[0])
             self.y.append(item[1])
-            self.curve.setData(self.x,self.y)
+        self.curve.setData(self.x,self.y)
 
     def run(self):
         app = QtGui.QApplication([])
@@ -43,19 +41,20 @@ class Superplot():
         timer.start(50)
 
         app.exec_()
-# This is function is responsible for reading some data (IO, serial port, etc)
-# and forwarding it to the display
-# it is run in a thread
-def io(running,q):
-    t = 0
-    while running.is_set():
-        s = np.sin(2 * np.pi * t)
-        t += 0.01
-        q.put([t,s])
-        time.sleep(0.01)
-    print("Done")
 
 if __name__ == '__main__':
+    # This is function is responsible for faking some data (IO, serial port, etc)
+    # and forwarding it to the display
+    # it is run in a thread
+    def io(running,q):
+        t = 0
+        while running.is_set():
+            for i in range(30):
+                s = np.sin(2 * np.pi * t)
+                t += 0.01
+                q.put([t,s])
+            time.sleep(0.0001)
+        print("Done")
     #To stop IO thread
     run = threading.Event()
     run.set()
