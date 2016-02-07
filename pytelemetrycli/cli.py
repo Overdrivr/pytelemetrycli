@@ -7,9 +7,24 @@ import pytelemetry.transports.serialtransport as transports
 import topics
 import runner
 from serial.tools import list_ports
-from ui import Plot
+
+import sys, serial, argparse
 import numpy as np
-from pyqtgraph.Qt import QtCore
+from collections import deque
+
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from numpy.random import ranf
+import ui.superplot
+
+# plot class
+class MyPlot:
+  def __init__(self):
+      self.y = deque()
+
+  def update(self, frameNum, a0, data):
+      a0.set_data(range(len(data)), data)
+      return a0,
 
 def docopt_cmd(func):
     def fn(self, arg):
@@ -134,21 +149,19 @@ Usage: plot <topic>
 
         print("Plotting:", arg['<topic>'])
 
-        plt = Plot.Plot2D()
+        self.myplot = MyPlot()
 
-        def update(plt,topics,topic):
-            data = topics.samples(topic,amount=0)
-            t = np.arange(0,len(data))
-            plt.trace(topic,t,data)
+        plt.ion()
 
-        timer = QtCore.QTimer()
-        timer.timeout.connect(lambda: update(plt,self.topics,arg['<topic>']))
-        timer.start(50)
-
-        data = self.topics.samples(arg['<topic>'],amount=0)
-        t = np.arange(0,len(data))
-        plt.trace(arg['<topic>'],t,data)
-        plt.start()
+        # set up animation
+        self.fig = plt.figure()
+        self.ax = plt.axes(xlim=(0, 100), ylim=(-1, 1))
+        self.a0, = self.ax.plot([], [])
+        self.anim = animation.FuncAnimation(self.fig, self.myplot.update,
+                                     fargs=[self.a0,self.topics.topics[arg['<topic>']]],
+                                     interval=100)
+        # show plot
+        plt.show()
 
     @docopt_cmd
     def do_pub(self, arg):
