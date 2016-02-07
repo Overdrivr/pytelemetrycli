@@ -7,24 +7,10 @@ import pytelemetry.transports.serialtransport as transports
 import topics
 import runner
 from serial.tools import list_ports
-
-import sys, serial, argparse
 import numpy as np
 from collections import deque
-
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
 from numpy.random import ranf
-import ui.superplot
-
-# plot class
-class MyPlot:
-  def __init__(self):
-      self.y = deque()
-
-  def update(self, frameNum, a0, data):
-      a0.set_data(range(len(data)), data)
-      return a0,
+import ui.superplot as ui
 
 def docopt_cmd(func):
     def fn(self, arg):
@@ -147,21 +133,11 @@ Usage: plot <topic>
         if not self.topics.exists(arg['<topic>']):
             print("Topic ",arg['<topic>']," unknown.")
 
+        self.myplot = ui.Superplot(arg['<topic>'])
+        q = self.myplot.start()
+        self.topics.transfer(arg['<topic>'],q)
+
         print("Plotting:", arg['<topic>'])
-
-        self.myplot = MyPlot()
-
-        plt.ion()
-
-        # set up animation
-        self.fig = plt.figure()
-        self.ax = plt.axes(xlim=(0, 100), ylim=(-1, 1))
-        self.a0, = self.ax.plot([], [])
-        self.anim = animation.FuncAnimation(self.fig, self.myplot.update,
-                                     fargs=[self.a0,self.topics.topics[arg['<topic>']]],
-                                     interval=100)
-        # show plot
-        plt.show()
 
     @docopt_cmd
     def do_pub(self, arg):
@@ -223,9 +199,10 @@ Quits out of Interactive Mode.
         print('Good Bye!')
         exit()
 
-try:
-    Application().cmdloop()
-except SystemExit:
-    pass
-except KeyboardInterrupt:
-    pass
+if __name__ == '__main__':
+    try:
+        Application().cmdloop()
+    except SystemExit:
+        pass
+    except KeyboardInterrupt:
+        pass
