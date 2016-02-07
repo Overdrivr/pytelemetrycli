@@ -24,14 +24,14 @@ class Superplot():
         self.p.join()
 
     def _update(self):
-        item = self.q.get()
-        self.x.append(item[0])
-        self.y.append(item[1])
-        self.curve.setData(self.x,self.y)
+        if not self.q.empty():
+            item = self.q.get()
+            self.x.append(item[0])
+            self.y.append(item[1])
+            self.curve.setData(self.x,self.y)
 
     def run(self):
         app = QtGui.QApplication([])
-
         win = pg.GraphicsWindow(title="Basic plotting examples")
         win.resize(1000,600)
         win.setWindowTitle('pyqtgraph example: Plotting')
