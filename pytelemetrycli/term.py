@@ -2,77 +2,16 @@ import os
 import sys
 import cmd
 import argparse
-import runner
-import topics
-import pytelemetry.pytelemetry as tm
-import pytelemetry.transports.serialtransport as transports
 from ui import Plot
 import numpy as np
 from pyqtgraph.Qt import QtCore
 
-class Console(cmd.Cmd):
-
-    def __init__(self):
-        cmd.Cmd.__init__(self)
-
-        self.transport = transports.SerialTransport()
-        self.telemetry = tm.pytelemetry(self.transport)
-        self.topics = topics.Topics(self.telemetry)
-        self.runner = runner.Runner(self.transport,self.telemetry)
-
-        self.completekey = None
-        self.prompt = ">> "
-        self.intro  = "pytelemetry terminal started."  ## defaults to None
-
-    ## Command definitions ##
-    def do_ls(self, args):
-        """
-            Prints a list of received topics
-        """
-        t = self.topics.ls()
-        for i in t:
-            print(i)
-
-    def do_print(self, args):
-        """
-            Prints X last received samples on a given topic
-        """
-
-        parser = argparse.ArgumentParser()
-        parser.add_argument('--topic','-t', dest='topic', required=True)
-        parser.add_argument('--amount','-a', dest='amount', type=int, default=10)
-        args = parser.parse_args(args.split())
-
-        s = self.topics.samples(args.topic,args.amount)
-        if s is not None:
-            for i in s:
-                print(i)
 
     def do_plot(self, args):
         """
             Plots a topic in a PyQtGraph plot
         """
-        if not self.topics.exists(args):
-            print("Topic [",args,"] unknown.")
-            return
-
-        print("Plotting:", args)
-
-        plt = Plot.Plot2D()
-
-        def update(plt,topics,topic):
-            data = topics.samples(topic,amount=0)
-            t = np.arange(0,len(data))
-            plt.trace(topic,t,data)
-
-        timer = QtCore.QTimer()
-        timer.timeout.connect(lambda: update(plt,self.topics,args))
-        timer.start(50)
-
-        data = self.topics.samples(args,amount=0)
-        t = np.arange(0,len(data))
-        plt.trace(args,t,data)
-        plt.start()
+        
 
     def do_count(self, args):
         """Counts amount of received samples on a given topic"""
@@ -85,34 +24,7 @@ class Console(cmd.Cmd):
         for i in s:
             print(i)
 
-    def do_exit(self, args):
-        """Exits from the terminal"""
-        return -1
 
-    def do_connect(self,args):
-        """Connect to a serial port"""
-        # Parse args
-        parser = argparse.ArgumentParser()
-        parser.add_argument('--port','-p', dest='port', required=True)
-        parser.add_argument('--baudrate','-b', dest='baudrate', type=int, default=115200)
-        args = parser.parse_args(args.split())
-
-        # Build the option dictionnary
-        options = dict()
-        options['port'] = args.port
-        options['baudrate'] = args.baudrate
-
-        try:
-            self.runner.connect(options)
-        except:
-            print("Failed to connect to :",options['port']," at ",options['baudrate']," (bauds)")
-            print("Connection error : ",sys.exc_info())
-        else:
-            print("Connected to :",options['port']," at ",options['baudrate']," (bauds)")
-
-    def do_disconnect(self,args):
-        self.runner.disconnect()
-        print("Disconnected.")
 
     def do_pub(self,args):
         """Publish data on a topic"""
@@ -134,14 +46,7 @@ class Console(cmd.Cmd):
             print("Invalid type. Not in ",valid_types)
             return
 
-        if args.type == 'float32':
-            args.data = float(args.data)
-        elif args.type != 'string':
-            args.data = int(args.data)
 
-        print("Published on |",args.topic,"|",args.data,"[",args.type,"]")
-
-        self.telemetry.publish(args.topic,args.data,args.type)
 
     ## Command definitions to support Cmd object functionality ##
     def do_help(self, args):
@@ -162,12 +67,7 @@ class Console(cmd.Cmd):
         self._locals  = {}      ## Initialize execution namespace for user
         self._globals = {}
 
-    def postloop(self):
-        """Take care of any unfinished business.
-           Despite the claims in the Cmd documentaion, Cmd.postloop() is not a stub.
-        """
-        cmd.Cmd.postloop(self)   ## Clean up command completion
-        self.runner.terminate()
+
 
     def precmd(self, line):
         """ This method is called after the line has been input but before
