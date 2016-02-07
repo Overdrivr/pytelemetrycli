@@ -8,6 +8,7 @@ class Runner:
         self.transport = transport
         self.telemetryWrapper = telemetry
 
+        self.thread = None
         self.running = threading.Event()
         self.running.set()
 
@@ -29,7 +30,8 @@ class Runner:
 
     def terminate(self):
         self.running.clear()
-        self.thread.join()
+        if self.thread:
+            self.thread.join()
         try:
             self.transport.disconnect()
         except:
