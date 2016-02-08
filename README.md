@@ -15,7 +15,7 @@ This command line interface is for you if:
 If you recognize yourself with any of the above points, this application is for you.
 
 ## Overview
-pytelemetry-cli (this repo) is a **command line interface**. It provides a set of commands to connect to a device, read, plot and write data on it.
+pytelemetry-cli is a **command line interface**. It provides a set of commands to connect to a device, read, plot and write data on it.
 pytelemetry-cli relies on [`pytelemetry`](https://github.com/Overdrivr/pytelemetry)
 [![PyPI version](https://badge.fury.io/py/pytelemetry.svg)](https://badge.fury.io/py/pytelemetry)
 to implement the specific communication protocol.
@@ -77,10 +77,10 @@ The command line interface can be started like this
 python -m pytelemetrycli.cli
 ```
 
-#### help [command]
+### help [command]
 Without arguments, you get a list of all available commands. Otherwise the full `command` documentation.
 
-#### ls
+### ls
 ```bash
 Without options, prints a list of all received topics.
 With the --serial flag, prints a list of all available COM ports
@@ -91,7 +91,7 @@ Options:
 -s, --serial     Use this flag to print a list of all available serial ports
 ```
 
-#### serial
+### serial
 ```bash
 Connects pytelemetry to the serial port.
 
@@ -101,7 +101,7 @@ Options:
 -b X, --bauds X        Connection speed in bauds  [default: 9600]
 ```
 
-#### print
+### print
 ```bash
 Prints X last received samples from <topic>.
 
@@ -111,28 +111,28 @@ Options:
 -a X, --amount X        Amount of samples to display [default: 1]
 ```
 
-#### pub
+### pub
 ```bash
 Publishes a (value | string) on <topic>.
 
 Usage: pub <topic> <value> (--u8 | --u16 | --u32 | --i8 | --i16 | --i32 | --f32 | --s)
 ```
 
-#### plot
+### plot
 ```bash
 Plots <topic> in a graph window.
 
 Usage: plot <topic>
 ```
 
-#### disconnect
+### disconnect
 ```bash
 Disconnects from any open connection.
 
 Usage: disconnect
 ```
 
-#### quit
+### quit
 ```bash
 Exits the terminal application.
 
