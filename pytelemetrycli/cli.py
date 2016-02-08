@@ -7,9 +7,6 @@ import pytelemetry.transports.serialtransport as transports
 import topics
 import runner
 from serial.tools import list_ports
-import numpy as np
-from collections import deque
-from numpy.random import ranf
 import ui.superplot as ui
 
 def docopt_cmd(func):
