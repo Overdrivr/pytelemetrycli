@@ -106,7 +106,7 @@ Options:
     @docopt_cmd
     def do_ls(self, arg):
         """
-By default, prints a list of all received topics.
+Without options, prints a list of all received topics.
 With the --serial flag, prints a list of all available COM ports
 
 Usage: ls [options]
@@ -193,7 +193,9 @@ Usage: disconnect
 
     def do_quit(self, arg):
         """
-Quits out of Interactive Mode.
+Exits the terminal application.
+
+Usage: quit
         """
         self.runner.terminate()
         print('Good Bye!')

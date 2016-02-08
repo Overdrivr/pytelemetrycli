@@ -25,31 +25,116 @@ The communication protocol is also available in a C library called [`telemetry`]
 
 ![Overview](https://raw.githubusercontent.com/Overdrivr/pytelemetrycli/master/overview.png)
 
-Explain pubsub/topics
+## Principle
+The underlying communication protocol mostly follows the [PubSub](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern)(publish/subscribe) messaging pattern.
+
+> [..] messages are published to "topics" or named logical channels. Subscribers in a topic-based system will receive all messages published to
+> the topics to which they subscribe [..].
+> *Source: Wikipedia*
+
+## Installation
+`pytelemetrycli` requires python 3.5+, PyQt4 and numpy.
+
+### Windows
+It is recommended to download [`numpy`](http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy) and [`PyQt4`](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pyqt4) wheels python packages (courtesy of Christoph Gohlke).
+
+In case you were wondering, **no** you **don't** have to install Qt. The binary wheel is enough.
+
+Then install with pip the downloaded files
+
+```bash
+pip install numpy-x.xx.x+vanilla-cp3x-none-winxxx.whl
+pip install PyQt4-x.xx.x-cp3x-none-winxxx.whl
+```
+
+Then, install `pytelemetrycli` from the pypi repository
+
+```bash
+pip install pytelemetrycli
+```
+
+### Mac OS
+The easiest way to install numpy and PyQt4 seem to be using `homebrew`.
+
+```bash
+brew install pyqt
+pip install pytelemetrycli
+```
+
+### Linux
+
+?
+
+## Telemetry on embedded devices
+To setup telemetry on any embedded device, please refer to the [`Telemetry`](https://github.com/Overdrivr/Telemetry) repository.
+
+If you only wish to test the command-line interface, you can also directly flash a test firmware from our own [collection](#)
+*Note: in process. In the future we will support a variety of devices so you can quickly start on with the command line.*
+
 ## List of commands
-Start the command line interface with
+The command line interface can be started like this
 ```
 python -m pytelemetrycli.cli
 ```
-To get detailed description of a command directly from the terminal
-help
-help command
-List of commands
-#### serial
+
+#### help [command]
+Without arguments, you get a list of all available commands. Otherwise the full `command` documentation.
 
 #### ls
+```bash
+Without options, prints a list of all received topics.
+With the --serial flag, prints a list of all available COM ports
+
+Usage: ls [options]
+
+Options:
+-s, --serial     Use this flag to print a list of all available serial ports
+```
+
+#### serial
+```bash
+Connects pytelemetry to the serial port.
+
+Usage: serial <port> [options]
+
+Options:
+-b X, --bauds X        Connection speed in bauds  [default: 9600]
+```
 
 #### print
+```bash
+Prints X last received samples from <topic>.
 
-#### plot
+Usage: print <topic> [options]
+
+Options:
+-a X, --amount X        Amount of samples to display [default: 1]
+```
 
 #### pub
-
-
-## Installation
-pytelemetrycli requires python 3.5+, PyQt4 and numpy.
-
-Then (To be done)
 ```bash
-pip install pytelemetrycli
+Publishes a (value | string) on <topic>.
+
+Usage: pub <topic> <value> (--u8 | --u16 | --u32 | --i8 | --i16 | --i32 | --f32 | --s)
+```
+
+#### plot
+```bash
+Plots <topic> in a graph window.
+
+Usage: plot <topic>
+```
+
+#### disconnect
+```bash
+Disconnects from any open connection.
+
+Usage: disconnect
+```
+
+#### quit
+```bash
+Exits the terminal application.
+
+Usage: quit
 ```
