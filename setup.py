@@ -15,7 +15,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 setup(
     name='pytelemetrycli',
 
-    version='1.0.1',
+    version='1.0.2',
 
     description='command-line interface for superior communication with any embedded device.',
     long_description=long_description,
