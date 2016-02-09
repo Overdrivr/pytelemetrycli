@@ -2,13 +2,15 @@ from setuptools import setup, find_packages, Extension
 from codecs import open
 from os import path
 from setuptools.dist import Distribution
+import pypandoc
 
-try:
-    import pypandoc
-    long_desc = pypandoc.convert('README.md', 'rst')
-except (IOError, ImportError):
-    print("ERROR : Could not convert README.md. Fallback")
-    long_desc = open('README.md').read()
+pypandoc.convert('README.md', 'rst', outputfile="README.rst")
+
+here = path.abspath(path.dirname(__file__))
+
+# Get the long description from the README file
+with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
+    long_description = f.read()
 
 setup(
     name='pytelemetrycli',
@@ -16,7 +18,7 @@ setup(
     version='1.0.0',
 
     description='command-line interface for superior communication with any embedded device.',
-    long_description=long_desc,
+    long_description=long_description,
 
     url='https://github.com/Overdrivr/pytelemetrycli',
 
