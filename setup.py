@@ -15,7 +15,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 setup(
     name='pytelemetrycli',
 
-    version='1.0.0',
+    version='1.0.1',
 
     description='command-line interface for superior communication with any embedded device.',
     long_description=long_description,
@@ -75,7 +75,7 @@ setup(
     # pip to create the appropriate form of executable for the target platform.
     entry_points={
         'console_scripts': [
-            'tlm = pytelemetrycli.cli:main',
+            'pytlm = pytelemetrycli.cli:pytlm',
         ],
     },
 )
