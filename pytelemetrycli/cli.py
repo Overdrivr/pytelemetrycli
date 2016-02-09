@@ -42,7 +42,7 @@ class Application (cmd.Cmd):
 
         # pytelemetry setup
         self.transport = transports.SerialTransport()
-        self.telemetry = tm.pytelemetry(self.transport)
+        self.telemetry = tm.Pytelemetry(self.transport)
         self.topics = topics.Topics()
         self.runner = runner.Runner(self.transport,self.telemetry)
         self.telemetry.subscribe(None,self.topics.process)
