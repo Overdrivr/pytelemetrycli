@@ -1,3 +1,4 @@
+[![PyPI version](https://badge.fury.io/py/pytelemetrycli.svg)](https://badge.fury.io/py/pytelemetrycli)
 ## pytelemetry command line interface
 
 This tool enables superior communication with any embedded device.
@@ -75,6 +76,15 @@ If you only wish to test the command-line interface, you can also directly flash
 The command line interface can be started like this
 ```
 python -m pytelemetrycli.cli
+```
+or more simply
+```
+pytlm
+```
+If everything is installed properly, `:>` should welcome you.
+```
+pytelemetry terminal started. (type help for a list of commands.)
+:> _
 ```
 
 ### help [command]
