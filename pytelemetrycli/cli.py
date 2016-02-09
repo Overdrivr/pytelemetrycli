@@ -4,10 +4,10 @@ import cmd
 from docopt import docopt, DocoptExit
 import pytelemetry.pytelemetry as tm
 import pytelemetry.transports.serialtransport as transports
-import topics
-import runner
+from pytelemetrycli.topics import Topics
+from pytelemetrycli.runner import Runner
 from serial.tools import list_ports
-import ui.superplot as ui
+from pytelemetrycli.ui import superplot
 
 def docopt_cmd(func):
     def fn(self, arg):
@@ -43,8 +43,8 @@ class Application (cmd.Cmd):
         # pytelemetry setup
         self.transport = transports.SerialTransport()
         self.telemetry = tm.Pytelemetry(self.transport)
-        self.topics = topics.Topics()
-        self.runner = runner.Runner(self.transport,self.telemetry)
+        self.topics = Topics()
+        self.runner = Runner(self.transport,self.telemetry)
         self.telemetry.subscribe(None,self.topics.process)
 
         self.types_lookup = {'--s'    :  'string',
@@ -198,10 +198,14 @@ Usage: quit
         print('Good Bye!')
         exit()
 
-if __name__ == '__main__':
+# Main function to start from script or from entry point
+def pytlm():
     try:
         Application().cmdloop()
     except SystemExit:
         pass
     except KeyboardInterrupt:
         pass
+
+if __name__ == '__main__':
+    pytlm()
