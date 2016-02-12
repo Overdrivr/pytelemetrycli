@@ -6,12 +6,12 @@ This tool enables superior communication with any embedded device.
 
 This command line interface is for you if:
 
-* you are using `printf` to debug your application (and looking for a better way)
-* you are all the time re-writing custom protocols on top of the serial port for each new application (and hating it)
-* you need a **reliable** and **error-tolerant** communication protocol for your application, that will run both on desktop and embedded
-* you need to finely tune your application, but so far you are compiling/flashing the code all over again after each parameter change
-* you want to **plot** parameters of your application in **real-time** in a clean, fast and reliable way
-* your embedded device has very limited resources and will tolerate only a fast and lightweight communication library
+* you are using `printf` to debug your application
+* you are all the time re-writing custom protocols for the serial port
+* you need a **reliable** and **error-tolerant** communication protocol for your application
+* you want to finely tune your application without loosing time compiling & flashing just to tune a parameter
+* you want to **plot** parameters of your application in **real-time**
+* your embedded device has very limited resources and will tolerate only a lightweight communication library
 * you have found some other communication protocol but cannot manage to integrate it on your specific device
 
 If you recognize yourself with any of the above points, this application is for you.
@@ -35,7 +35,8 @@ The underlying communication protocol mostly follows the [PubSub](https://en.wik
 > *Source: Wikipedia*
 
 ## Interface and plot widget
-Here is an example of connecting to a device through COM20, listing all received topics (`ls`) and opening a plot of some sensor data
+Aan example of listing serial ports (`ls -s`), connecting to a device through COM20, listing all received topics (`ls`) and opening a plot on topic `touch`
+
 ![Console example](https://raw.githubusercontent.com/Overdrivr/pytelemetrycli/master/console.png)
 
 ![Plot example](https://raw.githubusercontent.com/Overdrivr/pytelemetrycli/master/graph.png)
