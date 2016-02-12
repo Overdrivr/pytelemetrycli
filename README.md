@@ -1,4 +1,5 @@
-[![PyPI version](https://badge.fury.io/py/pytelemetrycli.svg)](https://badge.fury.io/py/pytelemetrycli)
+[![PyPI version](https://badge.fury.io/py/pytelemetrycli.svg)](https://badge.fury.io/py/pytelemetrycli) [![Join the chat at https://gitter.im/Overdrivr/pytelemetry](https://badges.gitter.im/Overdrivr/pytelemetry.svg)](https://gitter.im/Overdrivr/pytelemetry?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## pytelemetry command line interface
 
 This tool enables superior communication with any embedded device.
@@ -33,6 +34,13 @@ The underlying communication protocol mostly follows the [PubSub](https://en.wik
 > the topics to which they subscribe [..].
 > *Source: Wikipedia*
 
+## Interface and plot widget
+Here is an example of connecting to a device through COM20, listing all received topics (`ls`) and opening a plot of some sensor data
+![Console example](https://raw.githubusercontent.com/Overdrivr/pytelemetrycli/master/console.png)
+
+![Plot example](https://raw.githubusercontent.com/Overdrivr/pytelemetrycli/master/graph.png)
+
+
 ## Installation
 `pytelemetrycli` requires python 3.5+, PyQt4 and numpy.
 
@@ -48,7 +56,7 @@ pip install numpy-x.xx.x+vanilla-cp3x-none-winxxx.whl
 pip install PyQt4-x.xx.x-cp3x-none-winxxx.whl
 ```
 
-Then, install `pytelemetrycli` from the pypi repository
+Then, simply install `pytelemetrycli` with pip as usual
 
 ```bash
 pip install pytelemetrycli
@@ -56,10 +64,13 @@ pip install pytelemetrycli
 
 ### Mac OS
 The easiest way to install numpy and PyQt4 seem to be using `homebrew`.
+lease note that you should also have installed python 3.5 with homebrew for this to work correctly.
+Also, avoid to have another python 3.5 distribution on your system otherwise you will face import issues as well.
 
 ```bash
-brew install pyqt
-pip install pytelemetrycli
+brew install python3
+brew install pyqt --with-python3
+pip3 install pytelemetrycli
 ```
 
 ### Linux
@@ -75,7 +86,7 @@ If you only wish to test the command-line interface, you can also directly flash
 ## List of commands
 The command line interface can be started like this
 ```
-python -m pytelemetrycli.cli
+python3 -m pytelemetrycli.cli
 ```
 or more simply
 ```
