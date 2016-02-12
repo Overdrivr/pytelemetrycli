@@ -1,4 +1,4 @@
-[![PyPI version](https://badge.fury.io/py/pytelemetrycli.svg)](https://badge.fury.io/py/pytelemetrycli) [![Join the chat at https://gitter.im/Overdrivr/pytelemetry](https://badges.gitter.im/Overdrivr/pytelemetry.svg)](https://gitter.im/Overdrivr/pytelemetry?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![PyPI version](https://badge.fury.io/py/pytelemetrycli.svg)](https://badge.fury.io/py/pytelemetrycli) [![Join the chat at https://gitter.im/Overdrivr/pytelemetry](https://badges.gitter.im/Overdrivr/pytelemetry.svg)](https://gitter.im/Overdrivr/pytelemetry?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Stories in Ready](https://badge.waffle.io/Overdrivr/pytelemetrycli.svg?label=ready&title=Ready)](http://waffle.io/Overdrivr/pytelemetrycli)
 
 ## pytelemetry command line interface
 
@@ -31,7 +31,7 @@ The underlying communication protocol mostly follows the [PubSub](https://en.wik
 > *Source: Wikipedia*
 
 ## interface and plot widget
-Aan example of listing serial ports (`ls -s`), connecting to a device through COM20, listing all received topics (`ls`) and opening a plot on topic `touch`
+Aan example of listing serial ports `ls -s`, connecting to a device through COM20 `serial com20 --bauds 115200`, listing all received topics `ls` and opening a plot on topic touch `plot touch`
 
 ![Console example](https://raw.githubusercontent.com/Overdrivr/pytelemetrycli/master/console.png)
 
