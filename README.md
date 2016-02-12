@@ -2,39 +2,35 @@
 
 ## pytelemetry command line interface
 
-This tool enables superior communication with any embedded device.
-
-This command line interface is for you if:
+This tool enables superior communication with any embedded device. It is for you if:
 
 * you are using `printf` to debug your application
 * you are all the time re-writing custom protocols for the serial port
 * you need a **reliable** and **error-tolerant** communication protocol for your application
 * you want to finely tune your application without loosing time compiling & flashing just to tune a parameter
-* you want to **plot** parameters of your application in **real-time**
+* you want to **plot** parameters on the device in **real-time**
 * your embedded device has very limited resources and will tolerate only a lightweight communication library
-* you have found some other communication protocol but cannot manage to integrate it on your specific device
 
-If you recognize yourself with any of the above points, this application is for you.
-
-## Overview
+## overview
 pytelemetry-cli is a **command line interface**. It provides a set of commands to connect to a device, read, plot and write data on it.
+
+![Overview](https://raw.githubusercontent.com/Overdrivr/pytelemetrycli/master/overview.png)
+
 pytelemetry-cli relies on [`pytelemetry`](https://github.com/Overdrivr/pytelemetry)
 [![PyPI version](https://badge.fury.io/py/pytelemetry.svg)](https://badge.fury.io/py/pytelemetry)
 to implement the specific communication protocol.
 
-The communication protocol is also available in a C library called [`telemetry`](https://github.com/Overdrivr/pytelemetry)
- that is specifically designed to run on all platforms and to be as light as possible.
+To communicate with the device, you only need to make your device use the [`telemetry`](https://github.com/Overdrivr/pytelemetry)
+library.
 
-![Overview](https://raw.githubusercontent.com/Overdrivr/pytelemetrycli/master/overview.png)
-
-## Principle
+## principle
 The underlying communication protocol mostly follows the [PubSub](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern)(publish/subscribe) messaging pattern.
 
 > [..] messages are published to "topics" or named logical channels. Subscribers in a topic-based system will receive all messages published to
 > the topics to which they subscribe [..].
 > *Source: Wikipedia*
 
-## Interface and plot widget
+## interface and plot widget
 Aan example of listing serial ports (`ls -s`), connecting to a device through COM20, listing all received topics (`ls`) and opening a plot on topic `touch`
 
 ![Console example](https://raw.githubusercontent.com/Overdrivr/pytelemetrycli/master/console.png)
@@ -42,7 +38,7 @@ Aan example of listing serial ports (`ls -s`), connecting to a device through CO
 ![Plot example](https://raw.githubusercontent.com/Overdrivr/pytelemetrycli/master/graph.png)
 
 
-## Installation
+## installation
 `pytelemetrycli` requires python 3.5+, PyQt4 and numpy.
 
 ### Windows
@@ -78,7 +74,7 @@ pip3 install pytelemetrycli
 
 ?
 
-## Telemetry on embedded devices
+## setup for embedded devices
 To setup telemetry on any embedded device, please refer to the [`Telemetry`](https://github.com/Overdrivr/Telemetry) repository.
 
 If you only wish to test the command-line interface, you can also directly flash a test firmware from our own [collection](#)
