@@ -73,11 +73,11 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="322.40714"
-     inkscape:cy="170.51028"
+     inkscape:cx="1206.4923"
+     inkscape:cy="110.72758"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
-     showgrid="false"
+     showgrid="true"
      inkscape:object-nodes="true"
      inkscape:snap-bbox="true"
      inkscape:snap-intersection-paths="true"
@@ -618,6 +618,277 @@
        height="60.000008"
        x="60"
        y="32.362194"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002" />
+    <text
+       inkscape:export-ydpi="199.97002"
+       inkscape:export-xdpi="199.97002"
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Light';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1006.4286"
+       y="133.23492"
+       id="text4246"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\simple_overview.png"><tspan
+         sodipodi:role="line"
+         id="tspan4248"
+         x="1006.4286"
+         y="133.23492">pytelemetry</tspan></text>
+    <rect
+       inkscape:export-ydpi="199.97002"
+       inkscape:export-xdpi="199.97002"
+       style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#a0a0a0;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4250"
+       width="270"
+       height="60.000008"
+       x="930"
+       y="97.362206"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\simple_overview.png" />
+    <rect
+       inkscape:export-ydpi="199.97002"
+       inkscape:export-xdpi="199.97002"
+       y="162.3622"
+       x="930"
+       height="60"
+       width="270"
+       id="rect4252"
+       style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#a0a0a0;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\simple_overview.png" />
+    <text
+       inkscape:export-ydpi="199.97002"
+       inkscape:export-xdpi="199.97002"
+       sodipodi:linespacing="125%"
+       id="text4254"
+       y="188.54567"
+       x="1063.8077"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Light';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\simple_overview.png"><tspan
+         y="188.54567"
+         x="1063.8077"
+         id="tspan4256"
+         sodipodi:role="line">transport</tspan><tspan
+         style="font-size:15px"
+         id="tspan4258"
+         y="209.24879"
+         x="1063.8077"
+         sodipodi:role="line">(serial, wifi, bluetooth serial,...)</tspan></text>
+    <rect
+       inkscape:export-ydpi="199.97002"
+       inkscape:export-xdpi="199.97002"
+       style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#a0a0a0;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4260"
+       width="130"
+       height="60"
+       x="1320"
+       y="97.362206"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\simple_overview.png" />
+    <path
+       inkscape:export-ydpi="199.97002"
+       inkscape:export-xdpi="199.97002"
+       inkscape:connector-curvature="0"
+       id="path4262"
+       d="m 1210,192.3622 100,0"
+       style="fill:none;fill-rule:evenodd;stroke:#de510b;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\simple_overview.png" />
+    <path
+       inkscape:export-ydpi="199.97002"
+       inkscape:export-xdpi="199.97002"
+       style="fill:none;fill-rule:evenodd;stroke:#de510b;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4505)"
+       d="m 1311.6717,202.29174 -100,0"
+       id="path4264"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\simple_overview.png" />
+    <text
+       inkscape:export-ydpi="199.97002"
+       inkscape:export-xdpi="199.97002"
+       sodipodi:linespacing="125%"
+       id="text4266"
+       y="123.79076"
+       x="1383.9613"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Light';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\simple_overview.png"><tspan
+         y="123.79076"
+         x="1383.9613"
+         id="tspan4268"
+         sodipodi:role="line">telemetry</tspan><tspan
+         style="font-size:15px;text-align:center;text-anchor:middle"
+         id="tspan4270"
+         y="144.49388"
+         x="1383.9613"
+         sodipodi:role="line">(C library)</tspan></text>
+    <rect
+       inkscape:export-ydpi="199.97002"
+       inkscape:export-xdpi="199.97002"
+       y="97.362206"
+       x="1460"
+       height="60"
+       width="135"
+       id="rect4272"
+       style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#a0a0a0;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\simple_overview.png" />
+    <text
+       inkscape:export-ydpi="199.97002"
+       inkscape:export-xdpi="199.97002"
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Light';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1528.0631"
+       y="117.806"
+       id="text4274"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\simple_overview.png"><tspan
+         id="tspan4276"
+         sodipodi:role="line"
+         x="1528.0631"
+         y="117.806"
+         style="font-size:22.5px;text-align:center;text-anchor:middle">user</tspan><tspan
+         id="tspan4278"
+         sodipodi:role="line"
+         x="1528.0631"
+         y="145.931"
+         style="font-size:22.5px;text-align:center;text-anchor:middle">application</tspan></text>
+    <path
+       inkscape:export-ydpi="199.97002"
+       inkscape:export-xdpi="199.97002"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:connector-curvature="0"
+       id="path4280"
+       d="m 1535,-22.637796 60,-6e-6 0,80.000006 -10,10 -60,-6e-6 0,-79.999994 z"
+       style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#de510b;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\simple_overview.png" />
+    <g
+       inkscape:export-ydpi="199.97002"
+       inkscape:export-xdpi="199.97002"
+       id="g4282"
+       transform="translate(870,0)"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\simple_overview.png">
+      <path
+         style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#de510b;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="m 540,-12.637796 0,4.999999 5,10 0,44.999985 -5,5 0,5.00001 -90,0 0,-69.999994 z"
+         id="path4284"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="ccccccccc" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text4286"
+         y="27.719343"
+         x="497.44601"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Light';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#de510b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           style="font-size:22.5px;text-align:center;text-anchor:middle;fill:#de510b;fill-opacity:1"
+           id="tspan4288"
+           y="27.719343"
+           x="497.44601"
+           sodipodi:role="line">arduino</tspan></text>
+    </g>
+    <g
+       inkscape:export-ydpi="199.97002"
+       inkscape:export-xdpi="199.97002"
+       id="g4290"
+       transform="translate(870,0)"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\simple_overview.png">
+      <g
+         id="g4292"
+         transform="translate(5,-65.000002)">
+        <rect
+           ry="20.000008"
+           style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#de510b;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect4294"
+           width="70"
+           height="90"
+           x="560"
+           y="42.362206" />
+        <text
+           sodipodi:linespacing="125%"
+           id="text4296"
+           y="92.005058"
+           x="594.31842"
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Light';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#de510b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           xml:space="preserve"><tspan
+             style="font-size:22.5px;text-align:center;text-anchor:middle;fill:#de510b;fill-opacity:1"
+             id="tspan4298"
+             y="92.005058"
+             x="594.31842"
+             sodipodi:role="line">mbed</tspan></text>
+      </g>
+    </g>
+    <rect
+       inkscape:export-ydpi="199.97002"
+       inkscape:export-xdpi="199.97002"
+       y="162.3622"
+       x="1320"
+       height="60"
+       width="130"
+       id="rect4300"
+       style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#a0a0a0;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\simple_overview.png" />
+    <text
+       inkscape:export-ydpi="199.97002"
+       inkscape:export-xdpi="199.97002"
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Light';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1386.4867"
+       y="185.35931"
+       id="text4302"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\simple_overview.png"><tspan
+         sodipodi:role="line"
+         x="1386.4867"
+         y="185.35931"
+         id="tspan4304"
+         style="font-size:22.5px;text-align:center;text-anchor:middle">transport</tspan><tspan
+         id="tspan4306"
+         sodipodi:role="line"
+         x="1386.4867"
+         y="213.48431"
+         style="font-size:22.5px;text-align:center;text-anchor:middle">(uart, ...)</tspan></text>
+    <text
+       inkscape:export-ydpi="199.97002"
+       inkscape:export-xdpi="199.97002"
+       sodipodi:linespacing="125%"
+       id="text4308"
+       y="28.224419"
+       x="1562.4055"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Light';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#de510b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\simple_overview.png"><tspan
+         id="tspan4310"
+         style="font-size:22.5px;text-align:center;text-anchor:middle;fill:#de510b;fill-opacity:1"
+         y="28.224419"
+         x="1562.4055"
+         sodipodi:role="line">etc.</tspan></text>
+    <path
+       sodipodi:nodetypes="sscsssscs"
+       inkscape:connector-curvature="0"
+       id="path4314"
+       d="m 1195,60.362193 -260,0 -5,-10e-7 0,10 c 0,2.77 2.23,5 5,5 l 260,0 c 2.77,0 5,-2.23 5,-5 l 0,-10 z"
+       style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#a0a0a0;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\simple_overview.png"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002" />
+    <rect
+       style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#a0a0a0;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4316"
+       width="240"
+       height="90.000008"
+       x="945"
+       y="-34.637806"
+       rx="4.999999"
+       ry="4.999999"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\simple_overview.png"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002" />
+    <rect
+       ry="1"
+       rx="1"
+       y="65.36219"
+       x="1035"
+       height="5"
+       width="60"
+       id="rect4318"
+       style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#a0a0a0;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\simple_overview.png"
        inkscape:export-xdpi="199.97002"
        inkscape:export-ydpi="199.97002" />
   </g>
