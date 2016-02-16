@@ -1,23 +1,27 @@
 import runner
-import pytelemetry.pytelemetry as tm
+from pytelemetry.pytelemetry import Pytelemetry
 import pytelemetry.transports.serialtransport as transports
 import time
 
 transport = transports.SerialTransport()
-telemetry = tm.pytelemetry(transport)
+telemetry = Pytelemetry(transport)
 app = runner.Runner(transport,telemetry)
 
-def printer(topic, data):
-    print(topic," : ", data)
-
+def printer(topic, data, options):
+    if options:
+        print(topic,'[',options['index'],"] : ", data)
+    else:
+        print(topic," : ", data)
 options = dict()
-options['port'] = "COM20"
-options['baudrate'] = 9600
+port = "COM20"
+bauds = 115200
 
-app.connect(options)
+app.connect(port,bauds)
 
-telemetry.subscribe("variable", printer)
-telemetry.publish('variable ',1354,'int32')
+print("Connected.")
+
+telemetry.subscribe(None, printer)
+telemetry.publish('bar',1354,'int32')
 time.sleep(3)
 
 app.terminate()
