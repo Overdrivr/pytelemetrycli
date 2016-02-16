@@ -6,7 +6,7 @@ This tool enables superior communication with any embedded device. It is for you
 
 * you are using `printf` to debug your application
 * you are all the time re-writing custom protocols for the serial port
-* you need a **reliable** and **error-tolerant** communication protocol for your application
+* you need a **reliable** and **error-tolerant** communication protocol
 * you want to finely tune your application without loosing time compiling & flashing just to tune a parameter
 * you want to **plot** parameters on the device in **real-time**
 * your embedded device has very limited resources and will tolerate only a lightweight communication library

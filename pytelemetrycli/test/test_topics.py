@@ -43,8 +43,46 @@ def test_transfert_queue():
     topic.transfer(t1,q)
 
     assert q.qsize() > 0
-    #assert not q.empty()
 
     assert q.get() == [0, 123]
     assert q.get() == [1, 456]
     assert q.get() == [2, 789]
+
+    topic.process(t1,111)
+    topic.process(t1,222)
+
+    assert q.qsize() > 0
+
+    assert q.get() == [3, 111]
+    assert q.get() == [4, 222]
+
+def test_transfert_queue_indexed_data():
+    t1 = "testTopic"
+    topic = Topics()
+    q = Queue()
+
+    topic.process(t1,123, {'index': 5})
+    topic.process(t1,456, {'index': 6})
+    topic.process(t1,789, {'index': 7})
+
+    assert q.empty()
+
+    topic.transfer(t1,q)
+
+    assert q.qsize() > 0
+
+    assert q.get() == [5, 123]
+    assert q.get() == [6, 456]
+    assert q.get() == [7, 789]
+
+    topic.process(t1,111, {'index': 5})
+    topic.process(t1,222, {'index': 6})
+    topic.process(t1,333, {'index': 7})
+    topic.process(t1,333, {'index': 8})
+
+    assert q.qsize() > 0
+
+    assert q.get() == [5, 111]
+    assert q.get() == [6, 222]
+    assert q.get() == [7, 333]
+    assert q.get() == [8, 333]

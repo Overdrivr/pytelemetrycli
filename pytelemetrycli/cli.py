@@ -2,12 +2,12 @@
 import sys
 import cmd
 from docopt import docopt, DocoptExit
-import pytelemetry.pytelemetry as tm
+from pytelemetry.pytelemetry import Pytelemetry
 import pytelemetry.transports.serialtransport as transports
 from pytelemetrycli.topics import Topics
 from pytelemetrycli.runner import Runner
 from serial.tools import list_ports
-from pytelemetrycli.ui.superplot import Superplot
+from pytelemetrycli.ui.superplot import Superplot, PlotType
 
 def docopt_cmd(func):
     def fn(self, arg):
@@ -42,7 +42,7 @@ class Application (cmd.Cmd):
 
         # pytelemetry setup
         self.transport = transports.SerialTransport()
-        self.telemetry = tm.Pytelemetry(self.transport)
+        self.telemetry = Pytelemetry(self.transport)
         self.topics = Topics()
         self.runner = Runner(self.transport,self.telemetry)
         self.telemetry.subscribe(None,self.topics.process)
@@ -71,14 +71,14 @@ Options:
             self.runner.disconnect()
         except:
             pass # Already disconnected
-
         try:
-            self.runner.connect(arg['<port>'],arg['--bauds'])
+            b = int(arg['--bauds'])
+            self.runner.connect(arg['<port>'],b)
         except:
-            print("Failed to connect to :",arg['<port>']," at ",arg['--bauds']," (bauds)")
+            print("Failed to connect to :",arg['<port>']," at ",b," (bauds)")
             print("Connection error : ",sys.exc_info())
         else:
-            print("Connected to :",arg['<port>']," at ",arg['--bauds']," (bauds)")
+            print("Connected to :",arg['<port>']," at ",b," (bauds)")
 
     @docopt_cmd
     def do_print(self, arg):
@@ -130,11 +130,15 @@ Usage: plot <topic>
         if not self.topics.exists(arg['<topic>']):
             print("Topic ",arg['<topic>']," unknown.")
 
-        self.myplot = Superplot(arg['<topic>'])
+        t = self.topics.xytype(arg['<topic>'])
+        if t == 'indexed':
+            self.myplot = Superplot(arg['<topic>'],PlotType.indexed)
+        else:
+            self.myplot = Superplot(arg['<topic>'])
         q = self.myplot.start()
         self.topics.transfer(arg['<topic>'],q)
 
-        print("Plotting:", arg['<topic>'])
+        print("Plotting:", arg['<topic>'],' in mode [',t,']')
 
     @docopt_cmd
     def do_pub(self, arg):
