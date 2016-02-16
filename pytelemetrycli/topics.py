@@ -67,3 +67,6 @@ class Topics:
                     for item in self.topics[topic]['raw']:
                         queue.put([self.transfers[topic]['lastindex'], item])
                         self.transfers[topic]['lastindex'] += 1
+
+    def xytype(self,topic):
+        return self.topics[topic]['type']
