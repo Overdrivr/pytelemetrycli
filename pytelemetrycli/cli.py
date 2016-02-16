@@ -7,7 +7,7 @@ import pytelemetry.transports.serialtransport as transports
 from pytelemetrycli.topics import Topics
 from pytelemetrycli.runner import Runner
 from serial.tools import list_ports
-from pytelemetrycli.ui.superplot import Superplot
+from pytelemetrycli.ui.superplot import Superplot, PlotType
 
 def docopt_cmd(func):
     def fn(self, arg):
@@ -130,11 +130,15 @@ Usage: plot <topic>
         if not self.topics.exists(arg['<topic>']):
             print("Topic ",arg['<topic>']," unknown.")
 
-        self.myplot = Superplot(arg['<topic>'])
+        t = self.topics.xytype(arg['<topic>'])
+        if t == 'indexed':
+            self.myplot = Superplot(arg['<topic>'],PlotType.indexed)
+        else:
+            self.myplot = Superplot(arg['<topic>'])
         q = self.myplot.start()
         self.topics.transfer(arg['<topic>'],q)
 
-        print("Plotting:", arg['<topic>'])
+        print("Plotting:", arg['<topic>'],' in mode [',t,']')
 
     @docopt_cmd
     def do_pub(self, arg):
