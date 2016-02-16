@@ -2,7 +2,7 @@
 import sys
 import cmd
 from docopt import docopt, DocoptExit
-from pytelemetry.pytelemetry import Pytelemetry
+from pytelemetry import Pytelemetry
 import pytelemetry.transports.serialtransport as transports
 from pytelemetrycli.topics import Topics
 from pytelemetrycli.runner import Runner

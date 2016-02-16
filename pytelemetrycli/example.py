@@ -1,5 +1,5 @@
 import runner
-from pytelemetry.pytelemetry import Pytelemetry
+from pytelemetry import Pytelemetry
 import pytelemetry.transports.serialtransport as transports
 import time
 

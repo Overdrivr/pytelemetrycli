@@ -15,7 +15,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 setup(
     name='pytelemetrycli',
 
-    version='1.0.2',
+    version='1.0.3',
 
     description='command-line interface for superior communication with any embedded device.',
     long_description=long_description,
@@ -59,7 +59,7 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['pytelemetry','pyserial','docopt','pyqtgraph','numpy'],
+    install_requires=['pytelemetry>1.1.0','pyserial','docopt','pyqtgraph','numpy','sortedcontainers',],
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
