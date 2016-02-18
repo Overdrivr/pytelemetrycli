@@ -72,12 +72,18 @@ by issuing message-based commands using a multiprocessing Pipe
         # Refresh plot data
         self.curve.setData(self.x,self.y)
 
-        if self.in_process_pipe.poll():
-            msg = self.in_process_pipe.recv()
-            self._process_msg(msg)
+        try:
+            if self.in_process_pipe.poll():
+                msg = self.in_process_pipe.recv()
+                self._process_msg(msg)
+        except:
+            # If the polling failed, then the application most likely shut down
+            # So close the window and terminate as well
+            self.app.quit()
 
     def _process_msg(self, msg):
         if msg == "exit":
+            # TODO : Remove this line ? Redundant with send after app.exec_() ?
             self.in_process_pipe.send("closing")
             self.app.quit()
         elif msg == "clear":
@@ -96,8 +102,11 @@ by issuing message-based commands using a multiprocessing Pipe
         timer.start(50)
 
         self.app.exec_()
-        self.in_process_pipe.send("closing")
-
+        try:
+            self.in_process_pipe.send("closing")
+        except:
+            pass
+            # Process was done, no need to process exception
 
 if __name__ == '__main__':
     # This is function is responsible for faking some data (IO, serial port, etc)
