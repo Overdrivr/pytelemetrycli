@@ -8,6 +8,7 @@ from pytelemetrycli.topics import Topics
 from pytelemetrycli.runner import Runner
 from serial.tools import list_ports
 from pytelemetrycli.ui.superplot import Superplot, PlotType
+from threading import Lock
 
 def docopt_cmd(func):
     def fn(self, arg):
@@ -44,7 +45,13 @@ class Application (cmd.Cmd):
         self.transport = transports.SerialTransport()
         self.telemetry = Pytelemetry(self.transport)
         self.topics = Topics()
-        self.runner = Runner(self.transport,self.telemetry)
+        self.plots = []
+        self.plotsLock = Lock()
+        self.runner = Runner(self.transport,
+                             self.telemetry,
+                             self.plots,
+                             self.plotsLock,
+                             self.topics)
         self.telemetry.subscribe(None,self.topics.process)
 
         self.types_lookup = {'--s'    :  'string',
@@ -127,18 +134,41 @@ Plots <topic> in a graph window.
 
 Usage: plot <topic>
         """
-        if not self.topics.exists(arg['<topic>']):
-            print("Topic ",arg['<topic>']," unknown.")
 
-        t = self.topics.xytype(arg['<topic>'])
-        if t == 'indexed':
-            self.myplot = Superplot(arg['<topic>'],PlotType.indexed)
-        else:
-            self.myplot = Superplot(arg['<topic>'])
-        q = self.myplot.start()
-        self.topics.transfer(arg['<topic>'],q)
+        topic = arg['<topic>']
 
-        print("Plotting:", arg['<topic>'],' in mode [',t,']')
+        if not self.topics.exists(topic):
+            print("Topic ",topic," unknown.")
+            return
+
+        if self.topics.intransfer(topic):
+            print("Topic already plotted.")
+            return
+
+        plotTypeFlag = self.topics.xytype(arg['<topic>'])
+        plotType = PlotType.linear
+
+        if plotTypeFlag == 'indexed':
+            plotType = PlotType.indexed
+
+        p = Superplot(topic,plotType)
+        q, ctrl = p.start()
+
+        # Protect self.plots from modifications from the runner thread
+        self.plotsLock.acquire()
+
+        self.plots.append({
+            'topic': topic,
+            'plot': p,     # Plot handler
+            'queue': q,    # Data queue
+            'ctrl': ctrl   # Plot control pipe
+        })
+
+        self.plotsLock.release()
+
+        self.topics.transfer(topic,q)
+
+        print("Plotting:", topic,' in mode [',plotTypeFlag,']')
 
     @docopt_cmd
     def do_pub(self, arg):

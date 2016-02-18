@@ -69,6 +69,8 @@ def test_transfert_queue_indexed_data():
 
     topic.transfer(t1,q)
 
+    assert topic.intransfer(t1) == True
+
     assert q.qsize() > 0
 
     assert q.get() == [5, 123]
@@ -86,3 +88,14 @@ def test_transfert_queue_indexed_data():
     assert q.get() == [6, 222]
     assert q.get() == [7, 333]
     assert q.get() == [8, 333]
+
+    topic.untransfer(t1)
+
+    assert topic.intransfer(t1) == False
+
+    topic.process(t1,111, {'index': 5})
+    topic.process(t1,222, {'index': 6})
+    topic.process(t1,333, {'index': 7})
+    topic.process(t1,333, {'index': 8})
+
+    assert q.qsize() == 0
