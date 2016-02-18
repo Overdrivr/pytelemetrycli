@@ -3,11 +3,12 @@ import time
 
 # Main class
 class Runner:
-    def __init__(self, transport, telemetry, plots, topics):
+    def __init__(self, transport, telemetry, plots, plotsLock, topics):
 
         self.transport = transport
         self.telemetryWrapper = telemetry
         self.plots = plots
+        self.plotsLock = plotsLock
         self.topics = topics
 
         self.thread = None
@@ -44,6 +45,11 @@ class Runner:
             if self.connected.is_set():
                 # Update protocol decoding
                 self.telemetryWrapper.update()
+
+                # Protect the self.plots data structure from
+                # being modified from the main thread
+                self.plotsLock.acquire()
+                
                 # Poll each poll pipe to see if user closed them
                 plotToDelete = None
                 for p, i in zip(self.plots,range(len(self.plots))):
@@ -58,5 +64,7 @@ class Runner:
                     topic = self.plots[plotToDelete]['topic']
                     self.topics.untransfer(topic)
                     self.plots.pop(plotToDelete)
+
+                self.plotsLock.release()
             else:
                 time.sleep(0.5)
