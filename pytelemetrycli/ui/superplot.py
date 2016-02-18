@@ -41,11 +41,11 @@ by issuing message-based commands using a multiprocessing Pipe
         # The queue that will be used to transfer data from the main process
         # to the plot
         self.q = Queue()
-        self.main_pipe, self.in_process_pipe = Pipe()
+        main_pipe, self.in_process_pipe = Pipe()
         self.p = Process(target=self.run)
         self.p.start()
         # Return a handle to the data queue and the control pipe
-        return self.q, self.main_pipe
+        return self.q, main_pipe
 
     def join(self):
         self.p.join()
@@ -78,6 +78,7 @@ by issuing message-based commands using a multiprocessing Pipe
 
     def _process_msg(self, msg):
         if msg == "exit":
+            self.in_process_pipe.send("closing")
             self.app.quit()
         elif msg == "clear":
             self._clear()
@@ -95,7 +96,7 @@ by issuing message-based commands using a multiprocessing Pipe
         timer.start(50)
 
         self.app.exec_()
-
+        self.in_process_pipe.send("closing")
 
 
 if __name__ == '__main__':
