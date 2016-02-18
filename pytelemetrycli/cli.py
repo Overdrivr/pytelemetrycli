@@ -44,7 +44,11 @@ class Application (cmd.Cmd):
         self.transport = transports.SerialTransport()
         self.telemetry = Pytelemetry(self.transport)
         self.topics = Topics()
-        self.runner = Runner(self.transport,self.telemetry)
+        self.plots = []
+        self.runner = Runner(self.transport,
+                             self.telemetry,
+                             self.plots,
+                             self.topics)
         self.telemetry.subscribe(None,self.topics.process)
 
         self.types_lookup = {'--s'    :  'string',
@@ -130,15 +134,27 @@ Usage: plot <topic>
         if not self.topics.exists(arg['<topic>']):
             print("Topic ",arg['<topic>']," unknown.")
 
-        t = self.topics.xytype(arg['<topic>'])
-        if t == 'indexed':
-            self.myplot = Superplot(arg['<topic>'],PlotType.indexed)
-        else:
-            self.myplot = Superplot(arg['<topic>'])
-        q = self.myplot.start()
-        self.topics.transfer(arg['<topic>'],q)
+        topic = arg['<topic>']
 
-        print("Plotting:", arg['<topic>'],' in mode [',t,']')
+        plotTypeFlag = self.topics.xytype(arg['<topic>'])
+        plotType = PlotType.linear
+
+        if plotTypeFlag == 'indexed':
+            plotType = PlotType.indexed
+
+        p = Superplot(topic,plotType)
+        q, ctrl = p.start()
+
+        self.plots.append({
+            'topic': topic,
+            'plot': p,     # Plot handler
+            'queue': q,    # Data queue
+            'ctrl': ctrl   # Plot control pipe
+        })
+
+        self.topics.transfer(topic,q)
+
+        print("Plotting:", topic,' in mode [',plotTypeFlag,']')
 
     @docopt_cmd
     def do_pub(self, arg):
