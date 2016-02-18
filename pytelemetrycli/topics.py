@@ -74,5 +74,8 @@ class Topics:
             # Remove it from the transfer list
             del self.transfers[topic]
 
+    def intransfer(self,topic):
+        return topic in self.transfers
+
     def xytype(self,topic):
         return self.topics[topic]['type']
