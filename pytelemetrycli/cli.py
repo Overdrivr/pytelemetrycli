@@ -133,6 +133,7 @@ Usage: plot <topic>
         """
         if not self.topics.exists(arg['<topic>']):
             print("Topic ",arg['<topic>']," unknown.")
+            return
 
         topic = arg['<topic>']
 
