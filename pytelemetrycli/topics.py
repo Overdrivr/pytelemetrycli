@@ -1,9 +1,12 @@
 from sortedcontainers import SortedDict
+from logging import getLogger
 
 class Topics:
     def __init__(self):
         self.topics = dict()
         self.transfers = dict()
+        self.logger = getLogger('topics')
+        self.logger.info('started session')
 
     def process(self,topic, payload, options=None):
         if not topic in self.topics:
@@ -12,11 +15,18 @@ class Topics:
             self.topics[topic]['xy'] = SortedDict() # For indexed data
             if options:
                 self.topics[topic]['type'] = 'indexed'
+                self.logger.info('new:topic:indexed ' + topic)
             else:
                 self.topics[topic]['type'] = 'linear'
+                self.logger.info('new:topic:linear ' + topic)
 
         t = self.topics[topic]
         t['raw'].append(payload)
+
+        if options:
+            self.logger.debug('new sample | {0} [{1}] {2}'.format(topic, options['index'], payload))
+        else:
+            self.logger.debug('new sample | {0} {1}'.format(topic, payload))
 
         # If topic is of type indexed data, also store in ordered dict
         if options:
@@ -26,11 +36,15 @@ class Topics:
         if topic in self.transfers:
             # For indexed data, provide the index for x and payload for y
             if t['type'] == 'indexed' and options is not None:
-                self.transfers[topic]['queue'].put([options['index'], payload])
+                x = options['index']
+                self.transfers[topic]['queue'].put([x, payload])
             # For linear data, provide sample id for x and payload for y
             elif t['type'] == 'linear':
-                self.transfers[topic]['queue'].put([self.transfers[topic]['lastindex'], payload])
+                x = self.transfers[topic]['lastindex']
+                self.transfers[topic]['queue'].put([x, payload])
                 self.transfers[topic]['lastindex'] += 1
+            else:
+                self.logger.warning('unknown topic type {0} | {1}'.format(t['type'], topic))
 
     def ls(self):
         return self.topics.keys()
@@ -58,6 +72,9 @@ class Topics:
             self.transfers[topic] = dict()
             self.transfers[topic]['queue'] = queue
             self.transfers[topic]['lastindex'] = 0
+
+            self.logger.info('start transfer | {0}'.format(topic))
+
             # If there is already existing data under the topic
             if topic in self.topics:
                 if self.topics[topic]['type'] == 'indexed':
@@ -73,6 +90,7 @@ class Topics:
         if topic in self.transfers:
             # Remove it from the transfer list
             del self.transfers[topic]
+            self.logger.info('stop transfer | {0}'.format(topic))
 
     def intransfer(self,topic):
         return topic in self.transfers
