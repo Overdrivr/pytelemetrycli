@@ -9,6 +9,7 @@ from pytelemetrycli.runner import Runner
 from serial.tools import list_ports
 from pytelemetrycli.ui.superplot import Superplot, PlotType
 from threading import Lock
+from pytelemetrycli.initialization import init_logging
 
 def docopt_cmd(func):
     def fn(self, arg):
@@ -234,6 +235,7 @@ Usage: quit
 
 # Main function to start from script or from entry point
 def pytlm():
+    init_logging()
     try:
         Application().cmdloop()
     except SystemExit:
