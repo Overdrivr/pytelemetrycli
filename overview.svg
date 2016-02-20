@@ -19,13 +19,169 @@
   <defs
      id="defs4">
     <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker7864"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path7866"
+         style="fill:#de510b;fill-opacity:1;fill-rule:evenodd;stroke:#de510b;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker7418"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend">
+      <path
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#de510b;fill-opacity:1;fill-rule:evenodd;stroke:#de510b;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path7420"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker7106"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#de510b;fill-opacity:1;fill-rule:evenodd;stroke:#de510b;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path7108" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker6728"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#de510b;fill-opacity:1;fill-rule:evenodd;stroke:#de510b;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path6730" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5342"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#de510b;fill-opacity:1;fill-rule:evenodd;stroke:#de510b;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path5344" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker5224"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path5226"
+         style="fill:#de510b;fill-opacity:1;fill-rule:evenodd;stroke:#de510b;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker5148"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path5150"
+         style="fill:#de510b;fill-opacity:1;fill-rule:evenodd;stroke:#de510b;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker4423"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path4425"
+         style="fill:#de510b;fill-opacity:1;fill-rule:evenodd;stroke:#de510b;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker4373"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4375"
+         style="fill:#de510b;fill-opacity:1;fill-rule:evenodd;stroke:#de510b;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker4333"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#de510b;fill-opacity:1;fill-rule:evenodd;stroke:#de510b;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path4335" />
+    </marker>
+    <marker
        inkscape:isstock="true"
        style="overflow:visible"
        id="marker4505"
        refX="0"
        refY="0"
        orient="auto"
-       inkscape:stockid="Arrow2Lend">
+       inkscape:stockid="Arrow2Lend"
+       inkscape:collect="always">
       <path
          transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
          d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
@@ -72,9 +228,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="1206.4923"
-     inkscape:cy="110.72758"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="1228.9475"
+     inkscape:cy="-293.84957"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -689,12 +845,12 @@
        inkscape:connector-curvature="0"
        id="path4262"
        d="m 1210,192.3622 100,0"
-       style="fill:none;fill-rule:evenodd;stroke:#de510b;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
+       style="fill:none;fill-rule:evenodd;stroke:#de510b;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4333)"
        inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\simple_overview.png" />
     <path
        inkscape:export-ydpi="199.97002"
        inkscape:export-xdpi="199.97002"
-       style="fill:none;fill-rule:evenodd;stroke:#de510b;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4505)"
+       style="fill:none;fill-rule:evenodd;stroke:#de510b;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4373)"
        d="m 1311.6717,202.29174 -100,0"
        id="path4264"
        inkscape:connector-curvature="0"
@@ -891,5 +1047,434 @@
        inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\simple_overview.png"
        inkscape:export-xdpi="199.97002"
        inkscape:export-ydpi="199.97002" />
+    <text
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       sodipodi:linespacing="125%"
+       id="text4278"
+       y="598.23492"
+       x="1068.5531"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Light';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002"><tspan
+         y="598.23492"
+         x="1068.5531"
+         id="tspan4280"
+         sodipodi:role="line">pytelemetry</tspan></text>
+    <rect
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       y="562.36218"
+       x="1050"
+       height="60"
+       width="150"
+       id="rect4282"
+       style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#a0a0a0;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002" />
+    <path
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#de510b;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 1595,437.36221 60,-1e-5 0,80.00001 -10,10 -60,-10e-6 0,-79.99999 z"
+       id="path4293"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002" />
+    <g
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       transform="translate(930,460)"
+       id="g4295"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002">
+      <path
+         sodipodi:nodetypes="ccccccccc"
+         inkscape:connector-curvature="0"
+         id="path4297"
+         d="m 540,-12.637796 0,4.999999 5,10 0,44.999985 -5,5 0,5.00001 -90,0 0,-69.999994 z"
+         style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#de510b;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Light';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#de510b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="497.44601"
+         y="27.719343"
+         id="text4299"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           x="497.44601"
+           y="27.719343"
+           id="tspan4301"
+           style="font-size:22.5px;text-align:center;text-anchor:middle;fill:#de510b;fill-opacity:1">arduino</tspan></text>
+    </g>
+    <g
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       transform="translate(930,460)"
+       id="g4303"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002">
+      <g
+         transform="translate(5,-65.000002)"
+         id="g4305">
+        <rect
+           y="42.362206"
+           x="560"
+           height="90"
+           width="70"
+           id="rect4307"
+           style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#de510b;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           ry="20.000008" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Light';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#de510b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="594.31842"
+           y="92.005058"
+           id="text4309"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             x="594.31842"
+             y="92.005058"
+             id="tspan4311"
+             style="font-size:22.5px;text-align:center;text-anchor:middle;fill:#de510b;fill-opacity:1">mbed</tspan></text>
+      </g>
+    </g>
+    <text
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Light';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#de510b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1622.4055"
+       y="488.22443"
+       id="text4313"
+       sodipodi:linespacing="125%"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002"><tspan
+         sodipodi:role="line"
+         x="1622.4055"
+         y="488.22443"
+         style="font-size:22.5px;text-align:center;text-anchor:middle;fill:#de510b;fill-opacity:1"
+         id="tspan4315">etc.</tspan></text>
+    <path
+       inkscape:export-ydpi="199.97002"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#a0a0a0;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 1170,532.36219 -260,0 -5,0 0,10 c 0,2.77 2.23,5 5,5 l 260,0 c 2.77,0 5,-2.23 5,-5 l 0,-10 z"
+       id="path4317"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="sscsssscs" />
+    <rect
+       inkscape:export-ydpi="199.97002"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       ry="4.999999"
+       rx="4.999999"
+       y="437.36218"
+       x="920"
+       height="90.000008"
+       width="240"
+       id="rect4319"
+       style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#a0a0a0;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <rect
+       inkscape:export-ydpi="199.97002"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#a0a0a0;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4321"
+       width="60"
+       height="5"
+       x="1010"
+       y="537.36218"
+       rx="1"
+       ry="1" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text4329"
+       y="641.70477"
+       x="1107.0414"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:Roboto;-inkscape-font-specification:Roboto;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002"><tspan
+         y="641.70477"
+         x="1107.0414"
+         id="tspan4331"
+         sodipodi:role="line">python</tspan></text>
+    <path
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       style="fill:none;fill-rule:evenodd;stroke:#de510b;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4423)"
+       d="m 1210,572.36219 140,0"
+       id="path4419"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002"
+       sodipodi:nodetypes="cc"
+       transform="translate(1.1544239e-7,1.0831096e-6)" />
+    <path
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       inkscape:connector-curvature="0"
+       id="path4421"
+       d="m 1350,602.36219 -138.3283,0"
+       style="fill:none;fill-rule:evenodd;stroke:#de510b;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker7418)"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002"
+       sodipodi:nodetypes="cc" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text5654"
+       y="542.62964"
+       x="1249.0468"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:15px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Light';letter-spacing:0px;word-spacing:0px;fill:#de510b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002"><tspan
+         y="542.62964"
+         x="1249.0468"
+         id="tspan5656"
+         sodipodi:role="line">['foo', 123]</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:15px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Light';letter-spacing:0px;word-spacing:0px;fill:#de510b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1242.7334"
+       y="561.58789"
+       id="text5662"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002"><tspan
+         sodipodi:role="line"
+         id="tspan5664"
+         x="1242.7334"
+         y="561.58789">['bar', 4.5e6]</tspan></text>
+    <text
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:22.5px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Light';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1437.5983"
+       y="599.3974"
+       id="text4287"
+       sodipodi:linespacing="125%"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002"><tspan
+         sodipodi:role="line"
+         id="tspan4289"
+         x="1437.5983"
+         y="599.3974">telemetry</tspan><tspan
+         sodipodi:role="line"
+         x="1437.5983"
+         y="627.5224"
+         id="tspan4291"
+         style="font-size:15px;text-align:center;text-anchor:middle" /></text>
+    <rect
+       inkscape:export-ydpi="199.97002"
+       inkscape:export-xdpi="199.97002"
+       style="opacity:0.98999999;fill:none;fill-opacity:1;stroke:#a0a0a0;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4323"
+       width="150"
+       height="60"
+       x="1360"
+       y="562.36218"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:Roboto;-inkscape-font-specification:Roboto;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1419.8986"
+       y="641.70477"
+       id="text4325"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002"><tspan
+         sodipodi:role="line"
+         id="tspan4327"
+         x="1419.8986"
+         y="641.70477">C/C++</tspan></text>
+    <path
+       inkscape:export-ydpi="199.97002"
+       inkscape:export-xdpi="199.97002"
+       inkscape:connector-curvature="0"
+       id="path4985"
+       d="m 1515,572.3622 50,0"
+       style="fill:none;fill-rule:evenodd;stroke:#de510b;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker5148)"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:15px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Light';letter-spacing:0px;word-spacing:0px;fill:#de510b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1523.2323"
+       y="567.25885"
+       id="text5640"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002"><tspan
+         sodipodi:role="line"
+         id="tspan5642"
+         x="1523.2323"
+         y="567.25885">'foo'</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text5650"
+       y="628.15442"
+       x="1523.2484"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:15px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Light';letter-spacing:0px;word-spacing:0px;fill:#de510b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002"><tspan
+         y="628.15442"
+         x="1523.2484"
+         id="tspan5652"
+         sodipodi:role="line">'bar'</tspan></text>
+    <g
+       id="g5899"
+       transform="translate(40,-49.999991)"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002">
+      <path
+         sodipodi:nodetypes="cccccc"
+         inkscape:connector-curvature="0"
+         id="rect5136"
+         d="m 1530,632.36219 0,-30 5,-5 95,0 0,35 z"
+         style="opacity:0.98999999;fill:#ffffff;fill-opacity:1;stroke:#a0a0a0;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text5682"
+         y="611.82111"
+         x="1539.1891"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:15px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Light';letter-spacing:0px;word-spacing:0px;fill:#de510b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           y="611.82111"
+           x="1539.1891"
+           id="tspan5684"
+           sodipodi:role="line">rx: 123</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="text5686"
+         y="626.2395"
+         x="1539.5869"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:roboto;-inkscape-font-specification:'roboto Light';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           id="tspan5690"
+           y="626.2395"
+           x="1539.5869"
+           sodipodi:role="line">//your code</tspan></text>
+    </g>
+    <g
+       id="g5927"
+       transform="translate(15,-74.999991)"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002">
+      <path
+         sodipodi:nodetypes="cccccc"
+         inkscape:connector-curvature="0"
+         id="path5908"
+         d="m 1555,712.36219 0,-30 5,-5 95,0 0,35 z"
+         style="opacity:0.98999999;fill:#ffffff;fill-opacity:1;stroke:#a0a0a0;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:roboto;-inkscape-font-specification:'roboto Light';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="1564.6467"
+         y="706.71173"
+         id="text5692"
+         sodipodi:linespacing="125%"><tspan
+           id="tspan5704"
+           sodipodi:role="line"
+           x="1564.6467"
+           y="706.71173">//other code</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:15px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Light';letter-spacing:0px;word-spacing:0px;fill:#de510b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="1565.3723"
+         y="692.15808"
+         id="text5706"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan5708"
+           x="1565.3723"
+           y="692.15808">rx: 4.5e6</tspan></text>
+    </g>
+    <path
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       style="fill:none;fill-rule:evenodd;stroke:#de510b;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker7106)"
+       d="m 1515,577.36219 5,35 45,10e-6"
+       id="path7104"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:15px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Light';letter-spacing:0px;word-spacing:0px;fill:#de510b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1241.5364"
+       y="623.44189"
+       id="text7596"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002"><tspan
+         sodipodi:role="line"
+         id="tspan7598"
+         x="1241.5364"
+         y="623.44189">['qux', 'hello!']</tspan></text>
+    <g
+       transform="translate(-675,-89.999999)"
+       id="g7840"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002">
+      <path
+         style="opacity:0.98999999;fill:#ffffff;fill-opacity:1;stroke:#a0a0a0;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="m 1555,712.36219 0,-30 5,-5 95,0 0,35 z"
+         id="path7842"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cccccc" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text7844"
+         y="706.71173"
+         x="1564.6467"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:roboto;-inkscape-font-specification:'roboto Light';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           y="706.71173"
+           x="1564.6467"
+           sodipodi:role="line"
+           id="tspan7846">//other code</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="text7848"
+         y="692.15808"
+         x="1565.3723"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:15px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Light';letter-spacing:0px;word-spacing:0px;fill:#de510b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           y="692.15808"
+           x="1565.3723"
+           id="tspan7850"
+           sodipodi:role="line">rx: 'hello!'</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:15px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Light';letter-spacing:0px;word-spacing:0px;fill:#de510b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1003.9627"
+       y="622.08301"
+       id="text7858"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       inkscape:export-xdpi="199.97002"
+       inkscape:export-ydpi="199.97002"><tspan
+         sodipodi:role="line"
+         id="tspan7860"
+         x="1003.9627"
+         y="622.08301">'qux'</tspan></text>
+    <path
+       inkscape:export-ydpi="199.97002"
+       inkscape:export-xdpi="199.97002"
+       inkscape:connector-curvature="0"
+       id="path7862"
+       d="m 1040,602.36219 -50,0"
+       style="fill:none;fill-rule:evenodd;stroke:#de510b;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker7864)"
+       inkscape:export-filename="C:\Users\B48923\Documents\GitHub\pytelemetry\pubsub_overview.png"
+       sodipodi:nodetypes="cc" />
   </g>
 </svg>
