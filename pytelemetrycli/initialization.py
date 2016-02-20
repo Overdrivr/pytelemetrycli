@@ -1,4 +1,4 @@
-from logging import getLogger, Formatter, FileHandler
+from logging import getLogger, Formatter, FileHandler, StreamHandler
 from logging.handlers import RotatingFileHandler
 import logging
 import datetime
@@ -10,15 +10,19 @@ def init_logging():
 
     # Format how data will be .. formatted
     formatter = Formatter('%(asctime)s | %(levelname)s | %(message)s')
+    sharedformatter = Formatter('%(asctime)s | %(name)s | %(levelname)s | %(message)s')
+    streamformatter = Formatter('%(message)s')
 
     # Get the loggers used in pytelemetry.telemetry.telemetry file
     rx = getLogger('telemetry.rx')
     tx = getLogger('telemetry.tx')
     topics = getLogger('topics')
+    cli = getLogger('cli')
 
     rx.setLevel(logging.DEBUG)
     tx.setLevel(logging.DEBUG)
     topics.setLevel(logging.DEBUG)
+    cli.setLevel(logging.DEBUG)
 
     # Create a handler to save logging output to a file
     dateTag = datetime.datetime.now().strftime("%Y-%b-%d_%H-%M-%S")
@@ -35,11 +39,17 @@ def init_logging():
     tx_handler.setLevel(logging.DEBUG)
     tx_handler.setFormatter(formatter)
 
-    topics_handler = FileHandler('logs/{0}/topics-{0}.log'.format(dateTag))
-    topics_handler.setLevel(logging.DEBUG)
-    topics_handler.setFormatter(formatter)
+    app_handler = FileHandler('logs/{0}/cli-{0}.log'.format(dateTag))
+    app_handler.setLevel(logging.DEBUG)
+    app_handler.setFormatter(sharedformatter)
+
+    cli_stream_handler = StreamHandler()
+    cli_stream_handler.setLevel(logging.INFO)
+    cli_stream_handler.setFormatter(streamformatter)
 
     # Attach the logger to the handler
     rx.addHandler(rx_handler)
     tx.addHandler(tx_handler)
-    topics.addHandler(topics_handler)
+    topics.addHandler(app_handler)
+    cli.addHandler(app_handler)
+    #cli.addHandler(cli_stream_handler)
