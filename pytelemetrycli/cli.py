@@ -10,6 +10,10 @@ from serial.tools import list_ports
 from pytelemetrycli.ui.superplot import Superplot, PlotType
 from threading import Lock
 from pytelemetrycli.initialization import init_logging
+import logging
+from logging import getLogger
+
+logger = getLogger('cli')
 
 def docopt_cmd(func):
     def fn(self, arg):
@@ -77,16 +81,25 @@ Options:
         """
         try:
             self.runner.disconnect()
-        except:
-            pass # Already disconnected
+            logger.warn("User requested connect without desconnecting first.")
+        except (IOError,AttributeError) as e:
+            logger.warn("Already disconnected. Continuing happily. E : {0}"
+                         .format(e))
+            pass
+
         try:
             b = int(arg['--bauds'])
             self.runner.connect(arg['<port>'],b)
-        except:
-            print("Failed to connect to :",arg['<port>']," at ",b," (bauds)")
-            print("Connection error : ",sys.exc_info())
+        except IOError as e:
+            print("Failed to connect to {0} at {1} (bauds)."
+                    .format(arg['<port>'],b))
+
+            logger.warn("Failed to connect to {0} at {1} (bauds). E : "
+                          .format(arg['<port>'],b,e))
         else:
-            print("Connected to :",arg['<port>']," at ",b," (bauds)")
+            s = "Connected to {0} at {1} (bauds).".format(arg['<port>'],b)
+            print(s)
+            logger.info(s)
 
     @docopt_cmd
     def do_print(self, arg):
@@ -99,14 +112,28 @@ Options:
 -a X, --amount X        Amount of samples to display [default: 1]
 
         """
-        if not self.topics.exists(arg['<topic>']):
-            print("Topic '",arg['<topic>'],"' unknown. Type 'ls' to list all available")
+        topic = arg['<topic>']
+        if not self.topics.exists(topic):
+            s = "Topic '{0}' unknown. Type 'ls' to list all available topics.".format(topic)
+            print(s)
+            logger.warn(s)
             return
 
-        s = self.topics.samples(arg['<topic>'],int(arg['--amount']))
+        try:
+            amount = int(arg['--amount'])
+        except:
+            s = "Could not cast --amount = '{0}' to integer. Using 1.".format(amount)
+            print(s)
+            logger.warn(s)
+            amount = 1
+
+        s = self.topics.samples(topic,amount)
+
         if s is not None:
             for i in s:
                 print(i)
+        else:
+            logger.error("Could not retrieve {0} sample(s) under topic '{1}'.".format(amount,topic))
 
     @docopt_cmd
     def do_ls(self, arg):
@@ -139,11 +166,15 @@ Usage: plot <topic>
         topic = arg['<topic>']
 
         if not self.topics.exists(topic):
-            print("Topic ",topic," unknown.")
+            s = "Topic '{0}' unknown. Type 'ls' to list all available topics.".format(topic)
+            print(s)
+            logger.warn(s)
             return
 
         if self.topics.intransfer(topic):
-            print("Topic already plotted.")
+            s = "Topic '{0}' already plotting.".format(topic)
+            print(s)
+            logger.warn(s)
             return
 
         plotTypeFlag = self.topics.xytype(arg['<topic>'])
@@ -169,7 +200,9 @@ Usage: plot <topic>
 
         self.topics.transfer(topic,q)
 
-        print("Plotting:", topic,' in mode [',plotTypeFlag,']')
+        s = "Plotting '{0}' in mode [{1}].".format(topic,plotTypeFlag)
+        logger.info(s)
+        print(s)
 
     @docopt_cmd
     def do_pub(self, arg):
@@ -192,13 +225,16 @@ Usage: pub <topic> <value> (--u8 | --u16 | --u32 | --i8 | --i16 | --i32 | --f32 
                 valtype = self.types_lookup[i]
 
         if not valtype:
-            print("Impossible to identify type of payload. pub cancelled.")
-            print(arg)
+            logger.error(
+                "Payload type [{0}] unkown."
+                .format(arg))
             return
 
-        print("Published on |",arg['<topic>'],"|",arg['<value>'],"[",valtype,"]")
-
         self.telemetry.publish(arg['<topic>'],arg['<value>'],valtype)
+
+        s = "Published on topic '{0}' : {1} [{2}]".format(arg['<topic>'], arg['<value>'],valtype)
+        print(s)
+        logger.info(s)
 
     @docopt_cmd
     def do_count(self, arg):
@@ -208,7 +244,7 @@ Prints a count of received samples for each topic.
 Usage: count
         """
         for topic in self.topics.ls():
-            print(topic,":",self.topics.count(topic))
+            print("{0} : {1}".format(topic, self.topics.count(topic)))
 
     @docopt_cmd
     def do_disconnect(self, arg):
@@ -220,8 +256,9 @@ Usage: disconnect
         try:
             self.runner.disconnect()
             print("Disconnected.")
+            logger.info("Disconnected.")
         except:
-            print("Already disconnected.")
+            logger.warn("Already disconnected. Continuing happily.")
 
     def do_quit(self, arg):
         """
@@ -230,7 +267,8 @@ Exits the terminal application.
 Usage: quit
         """
         self.runner.terminate()
-        print('Good Bye!')
+        print("Good Bye!")
+        logger.info("Application quit.")
         exit()
 
 # Main function to start from script or from entry point
