@@ -85,10 +85,6 @@ The command line interface can be started like this
 ```
 python3 -m pytelemetrycli.cli
 ```
-or more simply
-```
-pytlm
-```
 If everything is installed properly, `:>` should welcome you.
 ```
 pytelemetry terminal started. (type help for a list of commands.)
