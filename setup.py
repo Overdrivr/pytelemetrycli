@@ -4,18 +4,20 @@ from os import path
 from setuptools.dist import Distribution
 import pypandoc
 
-pypandoc.convert('README.md', 'rst', outputfile="README.rst")
-
-here = path.abspath(path.dirname(__file__))
-
-# Get the long description from the README file
-with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
-    long_description = f.read()
+try:
+    long_description = pypandoc.convert('README.md', 'rst')
+    long_description = long_description.replace("\r","")
+except OSError:
+    print("Pandoc not found. Long_description conversion failure.")
+    import io
+    # pandoc is not installed, fallback to using raw contents
+    with io.open('README.md', encoding="utf-8") as f:
+        long_description = f.read()
 
 setup(
     name='pytelemetrycli',
 
-    version='1.0.3',
+    version='1.0.4',
 
     description='command-line interface for superior communication with any embedded device.',
     long_description=long_description,
