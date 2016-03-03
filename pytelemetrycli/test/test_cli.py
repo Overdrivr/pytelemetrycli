@@ -2,7 +2,10 @@ from pytelemetrycli.cli import Application
 import pytest
 import unittest.mock as mock
 from unittest.mock import patch
-"""
+import cmd
+import io
+import sys
+
 class TransportMock:
     def __init__(self):
         pass
@@ -15,6 +18,7 @@ class TransportMock:
     def writeable(self):
         pass
 
+"""
 class RunnerMock:
     def __init__(self):
         pass
@@ -63,3 +67,16 @@ def test_pub_to_exisiting_topic(tlmcli):
         tlmcli.onecmd("pub topicA 0.4 --f32") # TODO : Fix issue. Mocking doesn't seem to work
     mock.assert_called_with()
 """
+
+
+def test_ls():
+    tr = TransportMock()
+    outstream = io.StringIO()
+
+    tlm = Application(transport=tr,stdout=outstream)
+    tlm.onecmd("pub --f32 topicA 0.4")
+    assert outstream.readable()
+    assert outstream.getvalue() == "Published on topic 'topicA' : 0.4 [float32]"
+
+if __name__ == "__main__":
+    test_ls()
