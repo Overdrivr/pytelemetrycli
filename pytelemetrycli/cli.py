@@ -19,7 +19,11 @@ logger = getLogger('cli')
 def docopt_cmd(func):
     def fn(self, arg):
         try:
-            opt = docopt(fn.__doc__, arg)
+            if fn.__name__ == "do_pub":
+                # Fix for negative numbers
+                opt = docopt(fn.__doc__, arg, options_first=True)
+            else:
+                opt = docopt(fn.__doc__, arg)
 
         except DocoptExit as e:
             print('Command is invalid. See :')
@@ -215,7 +219,7 @@ Usage: plot <topic>
         """
 Publishes a (value | string) on <topic>.
 
-Usage: pub <topic> <value> (--u8 | --u16 | --u32 | --i8 | --i16 | --i32 | --f32 | --s)
+Usage: pub (--u8 | --u16 | --u32 | --i8 | --i16 | --i32 | --f32 | --s) <topic> <value>
         """
 
         if arg['--f32']:
