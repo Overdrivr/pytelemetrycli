@@ -12,6 +12,7 @@ from threading import Lock
 from pytelemetrycli.initialization import init_logging
 import logging
 from logging import getLogger
+import os
 
 logger = getLogger('cli')
 
@@ -67,6 +68,11 @@ class Application (cmd.Cmd):
                              '--i16'  :  'int16',
                              '--i32'  :  'int32',
                              '--f32'  :  'float32'}
+        logger.info("Module path : %s" % os.path.dirname(os.path.realpath(__file__)))
+        try:
+            logger.info("Module version : %s" % __version__)
+        except:
+            logger.warning("Module version : not found.")
 
     @docopt_cmd
     def do_serial(self, arg):
@@ -259,6 +265,19 @@ Usage: disconnect
             logger.info("Disconnected.")
         except:
             logger.warn("Already disconnected. Continuing happily.")
+
+    @docopt_cmd
+    def do_info(self, arg):
+        """
+Disconnects from any open connection.
+
+Usage: info
+        """
+        print("- CLI path : %s" % os.path.dirname(os.path.realpath(__file__)))
+        try:
+            print("- version : %s" % __version__)
+        except:
+            print("- version : not found.")
 
     def do_quit(self, arg):
         """
