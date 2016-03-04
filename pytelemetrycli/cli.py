@@ -104,13 +104,13 @@ Options:
             b = int(arg['--bauds'])
             self.runner.connect(arg['<port>'],b)
         except IOError as e:
-            self.stdout.write("Failed to connect to {0} at {1} (bauds)."
+            self.stdout.write("Failed to connect to {0} at {1} (bauds).\n"
                     .format(arg['<port>'],b))
 
-            logger.warn("Failed to connect to {0} at {1} (bauds). E : "
+            logger.warn("Failed to connect to {0} at {1} (bauds). E : \n"
                           .format(arg['<port>'],b,e))
         else:
-            s = "Connected to {0} at {1} (bauds).".format(arg['<port>'],b)
+            s = "Connected to {0} at {1} (bauds).\n".format(arg['<port>'],b)
             self.stdout.write(s)
             logger.info(s)
 
@@ -127,7 +127,7 @@ Options:
         """
         topic = arg['<topic>']
         if not self.topics.exists(topic):
-            s = "Topic '{0}' unknown. Type 'ls' to list all available topics.".format(topic)
+            s = "Topic '{0}' unknown. Type 'ls' to list all available topics.\n".format(topic)
             self.stdout.write(s)
             logger.warn(s)
             return
@@ -135,7 +135,7 @@ Options:
         try:
             amount = int(arg['--amount'])
         except:
-            s = "Could not cast --amount = '{0}' to integer. Using 1.".format(amount)
+            s = "Could not cast --amount = '{0}' to integer. Using 1.\n".format(amount)
             self.stdout.write(s)
             logger.warn(s)
             amount = 1
@@ -144,9 +144,9 @@ Options:
 
         if s is not None:
             for i in s:
-                self.stdout.write(i)
+                self.stdout.write("%i\n" % i)
         else:
-            logger.error("Could not retrieve {0} sample(s) under topic '{1}'.".format(amount,topic))
+            logger.error("Could not retrieve {0} sample(s) under topic '{1}'.\n".format(amount,topic))
 
     @docopt_cmd
     def do_ls(self, arg):
@@ -161,12 +161,14 @@ Options:
 
         """
         if arg['--serial']:
-            self.stdout.write("Available COM ports:")
+            self.stdout.write("Available COM ports:\n")
             for port,desc,hid in list_ports.comports():
-                self.stdout.write(port,'\t',desc)
+                self.stdout.write("%s \t %s\n" % (port,desc))
         else:
+
             for topic in self.topics.ls():
-                self.stdout.write(topic)
+                self.stdout.write("%s\n" % topic)
+
 
     @docopt_cmd
     def do_plot(self, arg):
@@ -179,13 +181,13 @@ Usage: plot <topic>
         topic = arg['<topic>']
 
         if not self.topics.exists(topic):
-            s = "Topic '{0}' unknown. Type 'ls' to list all available topics.".format(topic)
+            s = "Topic '{0}' unknown. Type 'ls' to list all available topics.\n".format(topic)
             self.stdout.write(s)
             logger.warn(s)
             return
 
         if self.topics.intransfer(topic):
-            s = "Topic '{0}' already plotting.".format(topic)
+            s = "Topic '{0}' already plotting.\n".format(topic)
             self.stdout.write(s)
             logger.warn(s)
             return
@@ -213,7 +215,7 @@ Usage: plot <topic>
 
         self.topics.transfer(topic,q)
 
-        s = "Plotting '{0}' in mode [{1}].".format(topic,plotTypeFlag)
+        s = "Plotting '{0}' in mode [{1}].\n".format(topic,plotTypeFlag)
         logger.info(s)
         self.stdout.write(s)
 
@@ -245,7 +247,7 @@ Usage: pub (--u8 | --u16 | --u32 | --i8 | --i16 | --i32 | --f32 | --s) <topic> <
 
         self.telemetry.publish(arg['<topic>'],arg['<value>'],valtype)
 
-        s = "Published on topic '{0}' : {1} [{2}]".format(arg['<topic>'], arg['<value>'],valtype)
+        s = "Published on topic '{0}' : {1} [{2}]\n".format(arg['<topic>'], arg['<value>'],valtype)
         self.stdout.write(s)
         logger.info(s)
 
@@ -257,7 +259,7 @@ Prints a count of received samples for each topic.
 Usage: count
         """
         for topic in self.topics.ls():
-            self.stdout.write("{0} : {1}".format(topic, self.topics.count(topic)))
+            self.stdout.write("{0} : {1}\n".format(topic, self.topics.count(topic)))
 
     @docopt_cmd
     def do_disconnect(self, arg):
@@ -268,7 +270,7 @@ Usage: disconnect
         """
         try:
             self.runner.disconnect()
-            self.stdout.write("Disconnected.")
+            self.stdout.write("Disconnected.\n")
             logger.info("Disconnected.")
         except:
             logger.warn("Already disconnected. Continuing happily.")
@@ -280,11 +282,11 @@ Disconnects from any open connection.
 
 Usage: info
         """
-        self.stdout.write("- CLI path : %s" % os.path.dirname(os.path.realpath(__file__)))
+        self.stdout.write("- CLI path : %s\n" % os.path.dirname(os.path.realpath(__file__)))
         try:
-            self.stdout.write("- version : %s" % __version__)
+            self.stdout.write("- version : %s\n" % __version__)
         except:
-            self.stdout.write.write("- version : not found.")
+            self.stdout.write("- version : not found.\n")
 
     def do_quit(self, arg):
         """
@@ -293,7 +295,7 @@ Exits the terminal application.
 Usage: quit
         """
         self.runner.terminate()
-        self.stdout.write.write("Good Bye!")
+        self.stdout.write("Good Bye!\n")
         logger.info("Application quit.")
         exit()
 
