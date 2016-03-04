@@ -47,7 +47,7 @@ class Topics:
                 self.logger.warning('unknown topic type {0} | {1}'.format(t['type'], topic))
 
     def ls(self):
-        return self.topics.keys()
+        return sorted(self.topics.keys())
 
     def samples(self,topic,amount=1):
         if not topic in self.topics:
