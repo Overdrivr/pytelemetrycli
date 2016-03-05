@@ -240,6 +240,8 @@ def test_wrong_command(fixturefortests):
     # Just check it doesn't raises
     tlm.onecmd("pub foo --i32 123")
 
+    clear(outstream)
+
 def test_info(fixturefortests):
     tr, outstream, tlm = fixturefortests
     clear(outstream)
@@ -247,3 +249,65 @@ def test_info(fixturefortests):
 
     # Just check it doesn't raise
     tlm.onecmd("info")
+
+    clear(outstream)
+
+def test_topics_are_cleared_after_reconnect(fixturefortests):
+    tr, outstream, tlm = fixturefortests
+    tr.authorizeConnect(True)
+    clear(outstream)
+    tlm.topics.clear() # Clear all topics
+
+    tlm.onecmd("serial com123")
+    tlm.runner.update()
+    assert outstream.getvalue() == "Connected to com123 at 9600 (bauds).\n"
+
+    clear(outstream)
+
+    tlm.onecmd("pub --f32 bar 4.2")
+    tlm.runner.update()
+    assert outstream.getvalue() == "Published on topic 'bar' : 4.2 [float32]\n"
+
+    clear(outstream)
+
+    tlm.onecmd("count")
+    tlm.runner.update()
+    assert outstream.getvalue() == "bar : 1\n"
+
+    clear(outstream)
+
+    tlm.onecmd("disconnect")
+    assert outstream.getvalue() == "Disconnected.\n"
+
+    clear(outstream)
+
+    tlm.onecmd("count")
+    tlm.runner.update()
+    assert outstream.getvalue() == "bar : 1\n"
+
+    clear(outstream)
+
+    tlm.onecmd("ls")
+    tlm.runner.update()
+    assert outstream.getvalue() == "bar\n"
+
+    clear(outstream)
+
+    tlm.onecmd("serial com123")
+    tlm.runner.update()
+    assert outstream.getvalue() == "Connected to com123 at 9600 (bauds).\n"
+
+    clear(outstream)
+
+    # After the re-connection all previous topics should be cleared
+    tlm.onecmd("count")
+    tlm.runner.update()
+    assert outstream.getvalue() == ""
+
+    clear(outstream)
+
+    tlm.onecmd("ls")
+    tlm.runner.update()
+    assert outstream.getvalue() == ""
+
+    clear(outstream)
