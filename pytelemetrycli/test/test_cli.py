@@ -32,19 +32,10 @@ class TransportMock:
     def writeable(self):
         return True
 
-"""
-def test_print_existing_topic(tlmcli):
-    # TODO: Test stdout ?
-    tlmcli.onecmd("print topicA")
-
-# TODO: Test plots ?
-
-def test_pub_to_exisiting_topic(tlmcli):
-    with patch.object(tlmcli.transport, 'writeable') as mock:
-        tlmcli.onecmd("pub topicA 0.4 --f32") # TODO : Fix issue. Mocking doesn't seem to work
-    mock.assert_called_with()
-"""
-
+# To be done
+class SuperplotMock:
+    def __init__(self):
+        pass
 
 @pytest.fixture(scope="module")
 def fixturefortests():
@@ -166,3 +157,93 @@ def test_print(fixturefortests):
     assert outstream.getvalue() == "2\n3\n4\n"
 
     clear(outstream)
+
+    tlm.onecmd("print qux")
+    tlm.runner.update()
+    assert outstream.getvalue() == "Topic 'qux' unknown. Type 'ls' to list all available topics.\n"
+
+    clear(outstream)
+
+    tlm.onecmd("print foo -a 2.3")
+    tlm.runner.update()
+    assert outstream.getvalue() == "Could not cast --amount = '2.3' to integer. Using 1.\n4\n"
+
+    clear(outstream)
+
+def test_count(fixturefortests):
+    tr, outstream, tlm = fixturefortests
+    clear(outstream)
+    tlm.topics.clear() # Clear all topics
+
+    tlm.onecmd("count")
+    tlm.runner.update()
+    assert outstream.getvalue() == ""
+
+    clear(outstream)
+
+    tlm.onecmd("pub --i32 foo 2")
+    tlm.runner.update()
+    assert outstream.getvalue() == "Published on topic 'foo' : 2 [int32]\n"
+
+    clear(outstream)
+
+    tlm.onecmd("count")
+    tlm.runner.update()
+    assert outstream.getvalue() == "foo : 1\n"
+
+    clear(outstream)
+
+    tlm.onecmd("pub --i32 foo 3")
+    tlm.runner.update()
+    assert outstream.getvalue() == "Published on topic 'foo' : 3 [int32]\n"
+
+    clear(outstream)
+
+    tlm.onecmd("count")
+    tlm.runner.update()
+    assert outstream.getvalue() == "foo : 2\n"
+
+    clear(outstream)
+
+    tlm.onecmd("pub --f32 bar 4.2")
+    tlm.runner.update()
+    assert outstream.getvalue() == "Published on topic 'bar' : 4.2 [float32]\n"
+
+    clear(outstream)
+
+    tlm.onecmd("count")
+    tlm.runner.update()
+    assert outstream.getvalue() == "bar : 1\nfoo : 2\n"
+
+    clear(outstream)
+
+def test_disconnect_quit(fixturefortests):
+    tr, outstream, tlm = fixturefortests
+    clear(outstream)
+    tlm.topics.clear() # Clear all topics
+
+    tlm.onecmd("disconnect")
+    assert outstream.getvalue() == "Disconnected.\n"
+
+    clear(outstream)
+
+    pytest.raises(SystemExit, tlm.onecmd, "quit")
+    assert outstream.getvalue() == "Good Bye!\n"
+
+    clear(outstream)
+
+def test_wrong_command(fixturefortests):
+    tr, outstream, tlm = fixturefortests
+    clear(outstream)
+    tlm.topics.clear() # Clear all topics
+
+    # Just check it doesn't raises
+    tlm.onecmd("pub foo --i32 123")
+
+def test_info(fixturefortests):
+    tr, outstream, tlm = fixturefortests
+    clear(outstream)
+    tlm.topics.clear() # Clear all topics
+
+    # Just check it doesn't raise
+    tlm.onecmd("info")
