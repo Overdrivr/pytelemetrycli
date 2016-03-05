@@ -29,7 +29,7 @@ environment:
       platform: x64
 
 init:
-  - "ECHO %PYTHON% %PYTHON_ARCH%" %PYTHON_VERSION% %MINICONDA%"
+  - "ECHO %PYTHON% %PYTHON_ARCH% %PYTHON_VERSION% %MINICONDA%"
 
 install:
   - "%MINICONDA%/Scripts/pip.exe install pytelemetry docopt sortedcontainers pyqtgraph"
