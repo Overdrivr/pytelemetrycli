@@ -29,13 +29,13 @@ environment:
       platform: x64
 
 init:
-  - "ECHO %PYTHON% %PYTHON_ARCH% %PYTHON_VERSION% %MINICONDA%"
+  - "ECHO %PYTHON_ARCH% %PYTHON_VERSION% %MINICONDA%"
 
 install:
-  - "%MINICONDA%/Scripts/pip.exe install pytelemetry docopt sortedcontainers pyqtgraph"
-  - "%MINICONDA%/Scripts/conda install numpy -y"
-  - "%MINICONDA%/Scripts/conda install PyQt4"
-  - "%MINICONDA%/Scripts/conda install pytest-cov"
+  - "%MINICONDA%\\Scripts\\pip.exe install pytelemetry docopt sortedcontainers pyqtgraph"
+  - "%MINICONDA%\\Scripts\\conda install numpy -y"
+  - "%MINICONDA%\\Scripts\\conda install PyQt4"
+  - "%MINICONDA%\\Scripts\\conda install pytest-cov"
   - "cd %APPVEYOR_BUILD_FOLDER%"
 test_script:
-  - "%MINICONDA%/Scripts/py.test --cov"
+  - "%MINICONDA%\\Scripts\\py.test --cov"
