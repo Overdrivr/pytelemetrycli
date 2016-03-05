@@ -40,31 +40,34 @@ class Runner:
         except:
             pass # Already disconnected
 
+    def update(self):
+        # Update protocol decoding
+        self.telemetryWrapper.update()
+
+        # Protect the self.plots data structure from
+        # being modified from the main thread
+        self.plotsLock.acquire()
+
+        # Poll each poll pipe to see if user closed them
+        plotToDelete = None
+        for p, i in zip(self.plots,range(len(self.plots))):
+            if p['ctrl'].poll():
+                if p['ctrl'].recv() == "closing":
+                    plotToDelete = i
+                    break
+
+        # Delete a plot if needed
+        if plotToDelete is not None:
+            self.plots[plotToDelete]['ctrl'].close()
+            topic = self.plots[plotToDelete]['topic']
+            self.topics.untransfer(topic)
+            self.plots.pop(plotToDelete)
+
+        self.plotsLock.release()
+
     def run(self):
         while self.running.is_set():
             if self.connected.is_set():
-                # Update protocol decoding
-                self.telemetryWrapper.update()
-
-                # Protect the self.plots data structure from
-                # being modified from the main thread
-                self.plotsLock.acquire()
-                
-                # Poll each poll pipe to see if user closed them
-                plotToDelete = None
-                for p, i in zip(self.plots,range(len(self.plots))):
-                    if p['ctrl'].poll():
-                        if p['ctrl'].recv() == "closing":
-                            plotToDelete = i
-                            break
-
-                # Delete a plot if needed
-                if plotToDelete is not None:
-                    self.plots[plotToDelete]['ctrl'].close()
-                    topic = self.plots[plotToDelete]['topic']
-                    self.topics.untransfer(topic)
-                    self.plots.pop(plotToDelete)
-
-                self.plotsLock.release()
+                self.update()
             else:
                 time.sleep(0.5)

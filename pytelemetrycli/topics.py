@@ -8,6 +8,11 @@ class Topics:
         self.logger = getLogger('topics')
         self.logger.info('started session')
 
+    def clear(self):
+        self.logger.info('Cleared all topics and received data')
+        self.topics = dict()
+        self.transfers = dict()
+
     def process(self,topic, payload, options=None):
         if not topic in self.topics:
             self.topics[topic] = dict()
@@ -47,7 +52,7 @@ class Topics:
                 self.logger.warning('unknown topic type {0} | {1}'.format(t['type'], topic))
 
     def ls(self):
-        return self.topics.keys()
+        return sorted(self.topics.keys())
 
     def samples(self,topic,amount=1):
         if not topic in self.topics:
