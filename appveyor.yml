@@ -35,7 +35,7 @@ init:
 
 install:
   - "%PYTHON%/Scripts/conda install pytelemetry docopt sortedcontainers pyqtgraph"
-  - "%PYTHON%/Scripts/conda install numpy"
+  - "%PYTHON%/Scripts/conda install numpy -y"
   - "%PYTHON%/Scripts/conda install PyQt4"
   - "%PYTHON%/Scripts/conda install pytest-cov"
   - "cd %APPVEYOR_BUILD_FOLDER%"
