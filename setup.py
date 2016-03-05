@@ -61,7 +61,7 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['pytelemetry>1.1.0','pyserial','docopt','pyqtgraph','numpy','sortedcontainers',],
+    install_requires=['pytelemetry>1.1.0','pyserial>3.0.0','docopt','pyqtgraph','numpy','sortedcontainers',],
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
