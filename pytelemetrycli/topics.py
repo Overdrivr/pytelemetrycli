@@ -8,6 +8,11 @@ class Topics:
         self.logger = getLogger('topics')
         self.logger.info('started session')
 
+    def clear(self):
+        self.logger.info('Cleared all topics and received data')
+        self.topics = dict()
+        self.transfers = dict()
+
     def process(self,topic, payload, options=None):
         if not topic in self.topics:
             self.topics[topic] = dict()
