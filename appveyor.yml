@@ -4,28 +4,28 @@ build: false
 
 environment:
   matrix:
-    - PYTHON: "C:\Miniconda3"
+    - PYTHON: "C:\\Miniconda3"
       PYTHON_ARCH: "32"
       platform: x86
 
-    - PYTHON: "C:\Miniconda3"
+    - PYTHON: "C:\\Miniconda3"
       PYTHON_ARCH: "32"
       platform: x64
 
-    - PYTHON: "C:\Miniconda3"
+    - PYTHON: "C:\\Miniconda3"
       PYTHON_ARCH: "64"
       platform: x64
 
-    - PYTHON: "C:\Miniconda35"
+    - PYTHON: "C:\\Miniconda35"
       PYTHON_VERSION: "3.5.x"
       PYTHON_ARCH: "32"
       platform: x86
 
-    - PYTHON: "C:\Miniconda35"
+    - PYTHON: "C:\\Miniconda35"
       PYTHON_ARCH: "32"
       platform: x64
 
-    - PYTHON: "C:\Miniconda35"
+    - PYTHON: "C:\\Miniconda35"
       PYTHON_ARCH: "64"
       platform: x64
 
