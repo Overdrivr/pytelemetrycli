@@ -4,40 +4,38 @@ build: false
 
 environment:
   matrix:
-    - PYTHON: "C:\\Miniconda3"
+    - MINICONDA: "C:\\Miniconda3"
       PYTHON_ARCH: "32"
       platform: x86
 
-    - PYTHON: "C:\\Miniconda3"
+    - MINICONDA: "C:\\Miniconda3"
       PYTHON_ARCH: "32"
       platform: x64
 
-    - PYTHON: "C:\\Miniconda3"
+    - MINICONDA: "C:\\Miniconda3"
       PYTHON_ARCH: "64"
       platform: x64
 
-    - PYTHON: "C:\\Miniconda35"
-      PYTHON_VERSION: "3.5.x"
+    - MINICONDA: "C:\\Miniconda35"
       PYTHON_ARCH: "32"
       platform: x86
 
-    - PYTHON: "C:\\Miniconda35"
+    - MINICONDA: "C:\\Miniconda35"
       PYTHON_ARCH: "32"
       platform: x64
 
-    - PYTHON: "C:\\Miniconda35"
+    - MINICONDA: "C:\\Miniconda35"
       PYTHON_ARCH: "64"
       platform: x64
-
 
 init:
-  - "ECHO %PYTHON% %PYTHON_VERSION% %PYTHON_ARCH%"
+  - "ECHO %PYTHON% %PYTHON_ARCH%" %PYTHON_VERSION% %MINICONDA%"
 
 install:
-  - "%PYTHON%/Scripts/conda install pytelemetry docopt sortedcontainers pyqtgraph"
-  - "%PYTHON%/Scripts/conda install numpy -y"
-  - "%PYTHON%/Scripts/conda install PyQt4"
-  - "%PYTHON%/Scripts/conda install pytest-cov"
+  - "%MINICONDA%/Scripts/pip.exe install pytelemetry docopt sortedcontainers pyqtgraph"
+  - "%MINICONDA%/Scripts/conda install numpy -y"
+  - "%MINICONDA%/Scripts/conda install PyQt4"
+  - "%MINICONDA%/Scripts/conda install pytest-cov"
   - "cd %APPVEYOR_BUILD_FOLDER%"
 test_script:
-  - "%PYTHON%/Scripts/py.test --cov"
+  - "%MINICONDA%/Scripts/py.test --cov"
