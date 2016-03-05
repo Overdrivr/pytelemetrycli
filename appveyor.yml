@@ -1,0 +1,43 @@
+version: 1.1.{build}-{branch}
+
+build: false
+
+environment:
+  matrix:
+    - PYTHON: "C:\Miniconda3"
+      PYTHON_ARCH: "32"
+      platform: x86
+
+    - PYTHON: "C:\Miniconda3"
+      PYTHON_ARCH: "32"
+      platform: x64
+
+    - PYTHON: "C:\Miniconda3"
+      PYTHON_ARCH: "64"
+      platform: x64
+
+    - PYTHON: "C:\Miniconda35"
+      PYTHON_VERSION: "3.5.x"
+      PYTHON_ARCH: "32"
+      platform: x86
+
+    - PYTHON: "C:\Miniconda35"
+      PYTHON_ARCH: "32"
+      platform: x64
+
+    - PYTHON: "C:\Miniconda35"
+      PYTHON_ARCH: "64"
+      platform: x64
+
+
+init:
+  - "ECHO %PYTHON% %PYTHON_VERSION% %PYTHON_ARCH%"
+
+install:
+  - "%PYTHON%/Scripts/conda install -r dev-requirements.txt"
+  - "%PYTHON%/Scripts/conda install numpy"
+  - "%PYTHON%/Scripts/conda install PyQt4"
+  - "%PYTHON%/Scripts/conda install pytest-cov"
+  - "cd %APPVEYOR_BUILD_FOLDER%"
+test_script:
+  - "%PYTHON%/Scripts/py.test --cov"
