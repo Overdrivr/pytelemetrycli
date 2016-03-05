@@ -135,7 +135,7 @@ Options:
         try:
             amount = int(arg['--amount'])
         except:
-            s = "Could not cast --amount = '{0}' to integer. Using 1.\n".format(amount)
+            s = "Could not cast --amount = '{0}' to integer. Using 1.\n".format(arg['--amount'])
             self.stdout.write(s)
             logger.warn(s)
             amount = 1
