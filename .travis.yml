@@ -33,8 +33,3 @@ install:
 # command to run tests
 script:
   - py.test --cov
-
-
-
-script:
-  # Your test script goes here
