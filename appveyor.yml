@@ -33,7 +33,7 @@ init:
 
 install:
   - "%MINICONDA%\\Scripts\\conda install numpy -y -q"
-  - "%MINICONDA%\\Scripts\\conda install pyqt -q"
+  - "%MINICONDA%\\Scripts\\conda install pyqt -y -q"
   - "%MINICONDA%\\Scripts\\conda install pip -y -q"
   - "%MINICONDA%\\Scripts\\pip.exe install pytelemetry docopt sortedcontainers pyqtgraph pytest-cov"
   - "cd %APPVEYOR_BUILD_FOLDER%"
