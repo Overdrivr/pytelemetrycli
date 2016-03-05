@@ -113,6 +113,8 @@ Options:
             s = "Connected to {0} at {1} (bauds).\n".format(arg['<port>'],b)
             self.stdout.write(s)
             logger.info(s)
+            self.topics.clear()
+            logger.info("Cleared all topics for new session.")
 
     @docopt_cmd
     def do_print(self, arg):
