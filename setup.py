@@ -12,7 +12,7 @@ setup(
 
     version='1.0.4',
 
-    description='command-line interface for superior communication with any embedded device.',
+    description='command-line interface for superior communication with embedded devices.',
     long_description=long_description,
 
     url='https://github.com/Overdrivr/pytelemetrycli',
