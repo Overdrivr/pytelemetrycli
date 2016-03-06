@@ -2,17 +2,10 @@ from setuptools import setup, find_packages, Extension
 from codecs import open
 from os import path
 from setuptools.dist import Distribution
-import pypandoc
+import io
 
-try:
-    long_description = pypandoc.convert('README.md', 'rst')
-    long_description = long_description.replace("\r","")
-except OSError:
-    print("Pandoc not found. Long_description conversion failure.")
-    import io
-    # pandoc is not installed, fallback to using raw contents
-    with io.open('README.md', encoding="utf-8") as f:
-        long_description = f.read()
+with io.open('DESCRIPTION.rst', encoding="utf-8") as f:
+    long_description = f.read()
 
 setup(
     name='pytelemetrycli',
@@ -61,7 +54,7 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['pytelemetry>1.1.0','pyserial>3.0.0','docopt','pyqtgraph','numpy','sortedcontainers',],
+    install_requires=['pytelemetry>1.1.4','pyserial>3.0.0','docopt','pyqtgraph','numpy','sortedcontainers',],
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
