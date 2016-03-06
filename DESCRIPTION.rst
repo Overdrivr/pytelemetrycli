@@ -2,10 +2,13 @@ Pytelemetry Command Line Interface
 ====================================
 
 This module is a powerful command line interface for extremely fast debugging and communication with embedded systems.
+
 It allows for plotting embedded device's data on-the-fly, publishing values on any topics, listing serial ports and much more.
+
 The CLI relies on custom protocol, implemented in Python and C languages.
 The main strength of this protocol is strong decoupling between communicating devices, simplicity yet flexibility.
-For instance, the protocol supports sending standard linear data, but also arrays and sparse arrays in an embedded-friendly manner.
+
+For instance, the protocol supports sending standard linear data, but also arrays and sparse arrays in a network-friendly manner.
 
 -  `Project page <https://github.com/Overdrivr/pytelemetrycli>`__
 
