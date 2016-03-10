@@ -122,6 +122,12 @@ def test_print(fixturefortests):
 
     clear(outstream)
 
+    tlm.onecmd("pub --s hello world")
+    tlm.runner.update()
+    assert outstream.getvalue() == "Published on topic 'hello' : world [string]\n"
+
+    clear(outstream)
+
     tlm.onecmd("pub --i32 foo 4")
     tlm.runner.update()
     assert outstream.getvalue() == "Published on topic 'foo' : 4 [int32]\n"
@@ -161,6 +167,12 @@ def test_print(fixturefortests):
     tlm.onecmd("print qux")
     tlm.runner.update()
     assert outstream.getvalue() == "Topic 'qux' unknown. Type 'ls' to list all available topics.\n"
+
+    clear(outstream)
+
+    tlm.onecmd("print hello")
+    tlm.runner.update()
+    assert outstream.getvalue() == "world\n"
 
     clear(outstream)
 
