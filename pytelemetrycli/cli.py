@@ -299,9 +299,21 @@ of the maximum baudrate is being used, etc.
 
 Usage: info
         """
+        measures = self.runner.stats()
+
+        self.stdout.write("Raw IO:\n")
+        for key,item in measures.items():
+            self.stdout.write("\t%s : %s\n" % (key,item))
+
         measures = self.telemetry.stats()
-        for key,item in zip(measures.keys(),measures.items()):
-            print("%s : %s" % (key,item))
+
+        self.stdout.write("Framing:\n")
+        for key,item in measures['framing'].items():
+            self.stdout.write("\t%s : %s\n" % (key,item))
+
+        self.stdout.write("Protocol:\n")
+        for key,item in measures['protocol'].items():
+            self.stdout.write("\t%s : %s\n" % (key,item))
 
     def do_quit(self, arg):
         """
