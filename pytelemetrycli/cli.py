@@ -146,7 +146,7 @@ Options:
 
         if s is not None:
             for i in s:
-                self.stdout.write("%i\n" % i)
+                self.stdout.write("{0}\n".format(i))
         else:
             logger.error("Could not retrieve {0} sample(s) under topic '{1}'.\n".format(amount,topic))
 
