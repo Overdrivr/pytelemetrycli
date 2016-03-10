@@ -18,10 +18,18 @@ class Runner:
         self.connected = threading.Event()
         self.connected.clear()
 
+        self.baudrate = 1
+        self.baudspeed = 0
+        self.lasttime = time.time()
+        self.lastamount = 0
+
+        self.baudspeed_avg = 0
+
     def connect(self,port,bauds):
         options = dict()
         options['port'] = port
         options['baudrate'] = bauds
+        self.baudrate = bauds
         self.transport.connect(options)
         self.connected.set()
         self.thread = threading.Thread(target=self.run)
@@ -40,6 +48,14 @@ class Runner:
         except:
             pass # Already disconnected
 
+    def stats(self):
+        return {
+            "baudspeed" : self.baudspeed,
+            "baudspeed_avg" : self.baudspeed_avg,
+            "baudratio" : self.baudspeed / self.baudrate,
+            "baudratio_avg" : self.baudspeed_avg / self.baudrate
+        }
+
     def update(self):
         # Update protocol decoding
         self.telemetryWrapper.update()
@@ -47,6 +63,26 @@ class Runner:
         # Protect the self.plots data structure from
         # being modified from the main thread
         self.plotsLock.acquire()
+
+        # Update baudspeed value
+        current = time.time()
+        difft = current - self.lasttime
+
+        if difft > 0.0 :
+            self.lasttime = current
+
+            current = self.transport.stats()['rx_bytes']
+            diff = current - self.lastamount
+            self.lastamount = current
+
+            self.baudspeed = diff / difft
+
+            # Compute rolling average baud speed
+            n = 1000
+            self.baudspeed_avg = (self.baudspeed + n * self.baudspeed_avg) / (n + 1)
+            # Need a dedicated flag with ls to display program parameters
+            #self.topics.process("baudspeed",self.baudspeed)
+            #self.topics.process("baudspeed_avg",self.baudspeed_avg)
 
         # Poll each poll pipe to see if user closed them
         plotToDelete = None
