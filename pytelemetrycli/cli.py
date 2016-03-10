@@ -297,7 +297,7 @@ Displays different metrics about the active transport (ex : serial port).
 This allows you to know if for instance corrupted frames are received, what fraction
 of the maximum baudrate is being used, etc.
 
-Usage: info
+Usage: stats
         """
         measures = self.runner.stats()
 
