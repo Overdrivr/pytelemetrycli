@@ -280,7 +280,7 @@ Usage: disconnect
     @docopt_cmd
     def do_info(self, arg):
         """
-Disconnects from any open connection.
+Prints out cli.py full path, module version.
 
 Usage: info
         """
@@ -289,6 +289,19 @@ Usage: info
             self.stdout.write("- version : %s\n" % __version__)
         except:
             self.stdout.write("- version : not found.\n")
+
+    @docopt_cmd
+    def do_stats(self, arg):
+        """
+Displays different metrics about the active transport (ex : serial port).
+This allows you to know if for instance corrupted frames are received, what fraction
+of the maximum baudrate is being used, etc.
+
+Usage: info
+        """
+        measures = self.telemetry.stats()
+        for key,item in zip(measures.keys(),measures.items()):
+            print("%s : %s" % (key,item))
 
     def do_quit(self, arg):
         """
