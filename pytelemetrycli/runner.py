@@ -68,7 +68,7 @@ class Runner:
         current = time.time()
         difft = current - self.lasttime
 
-        if difft > 0.0 :
+        if difft > 0.05 :
             self.lasttime = current
 
             current = self.transport.stats()['rx_bytes']
@@ -77,8 +77,8 @@ class Runner:
 
             self.baudspeed = diff / difft
 
-            # Compute rolling average baud speed
-            n = 1000
+            # Compute rolling average baud speed on about 1 second window
+            n = 20
             self.baudspeed_avg = (self.baudspeed + n * self.baudspeed_avg) / (n + 1)
             # Need a dedicated flag with ls to display program parameters
             #self.topics.process("baudspeed",self.baudspeed)
