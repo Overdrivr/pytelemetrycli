@@ -299,9 +299,17 @@ of the maximum baudrate is being used, etc.
 
 Usage: stats
         """
-        measures = self.runner.stats()
+
+
+        measures = self.transport.stats()
 
         self.stdout.write("Raw IO:\n")
+        for key,item in measures.items():
+            self.stdout.write("\t%s : %s\n" % (key,item))
+
+        measures = self.runner.stats()
+
+        self.stdout.write("IO speeds:\n")
         for key,item in measures.items():
             self.stdout.write("\t%s : %s\n" % (key,item))
 
