@@ -18,12 +18,7 @@ class Runner:
         self.connected = threading.Event()
         self.connected.clear()
 
-        self.baudrate = 1
-        self.baudspeed = 0
-        self.lasttime = time.time()
-        self.lastamount = 0
-
-        self.baudspeed_avg = 0
+        self.resetStats()
 
     def connect(self,port,bauds):
         options = dict()
@@ -55,6 +50,13 @@ class Runner:
             "baudratio" : self.baudspeed / self.baudrate,
             "baudratio_avg" : self.baudspeed_avg / self.baudrate
         }
+
+    def resetStats(self):
+        self.baudrate = 1.0
+        self.baudspeed = 0.0
+        self.lasttime = time.time()
+        self.lastamount = 0.0
+        self.baudspeed_avg = 0.0
 
     def update(self):
         # Update protocol decoding
