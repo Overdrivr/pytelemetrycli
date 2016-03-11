@@ -11,6 +11,7 @@ class TransportMock:
     def __init__(self):
         self.q = queue.Queue()
         self.canConnect = False
+        self.counter = 0
     def authorizeConnect(self,value):
         self.canConnect = value
     def connect(self,options):
@@ -20,6 +21,7 @@ class TransportMock:
         pass
     def read(self, maxbytes=1):
         amount = maxbytes if self.q.qsize() > maxbytes else self.q.qsize()
+        self.counter += amount
         data = []
         for i in range(amount):
             data.append(self.q.get())
@@ -31,6 +33,12 @@ class TransportMock:
             self.q.put(c)
     def writeable(self):
         return True
+    def resetStats(self):
+        self.counter = 0
+    def stats(self):
+        return {
+        "rx_bytes": self.counter
+        }
 
 # To be done
 class SuperplotMock:
@@ -323,3 +331,107 @@ def test_topics_are_cleared_after_reconnect(fixturefortests):
     assert outstream.getvalue() == ""
 
     clear(outstream)
+
+
+def test_stats(fixturefortests):
+    tr, outstream, tlm = fixturefortests
+    clear(outstream)
+    tlm.topics.clear() # Clear all topics
+
+    tr.resetStats()
+    tlm.runner.resetStats()
+    tlm.telemetry.resetStats()
+    tlm.onecmd("stats")
+
+    assert "Raw IO:\n" in outstream.getvalue()
+    assert "\trx_bytes : 0\n" in outstream.getvalue()
+    assert "IO speeds:\n" in outstream.getvalue()
+    assert "\tbaudspeed : 0.0\n" in outstream.getvalue()
+    assert "\tbaudratio : 0.0\n" in outstream.getvalue()
+    assert "\tbaudratio_avg : 0.0\n" in outstream.getvalue()
+    assert "\tbaudspeed_avg : 0.0\n" in outstream.getvalue()
+    assert "Framing:\n" in outstream.getvalue()
+    assert "\ttx_encoded_frames : 0\n" in outstream.getvalue()
+    assert "\trx_uncomplete_frames : 0\n" in outstream.getvalue()
+    assert "\ttx_processed_bytes : 0\n" in outstream.getvalue()
+    assert "\trx_complete_frames : 0\n" in outstream.getvalue()
+    assert "\ttx_escaped_bytes : 0\n" in outstream.getvalue()
+    assert "\trx_discarded_bytes : 0\n" in outstream.getvalue()
+    assert "\trx_processed_bytes : 0\n" in outstream.getvalue()
+    assert "\trx_escaped_bytes : 0\n" in outstream.getvalue()
+    assert "Protocol:\n" in outstream.getvalue()
+    assert "\ttx_encoded_frames : 0\n" in outstream.getvalue()
+    assert "\trx_corrupted_header : 0\n" in outstream.getvalue()
+    assert "\trx_decoded_frames : 0\n" in outstream.getvalue()
+    assert "\trx_corrupted_payload : 0\n" in outstream.getvalue()
+    assert "\trx_corrupted_crc : 0\n" in outstream.getvalue()
+    assert "\trx_corrupted_eol : 0\n" in outstream.getvalue()
+    assert "\trx_corrupted_topic : 0\n" in outstream.getvalue()
+
+    tlm.onecmd("pub --i32 foo 2")
+
+    clear(outstream)
+
+    tlm.runner.update()
+
+    tlm.onecmd("stats")
+
+    speeds = tlm.runner.stats()
+
+    assert "Raw IO:\n" in outstream.getvalue()
+    assert "\trx_bytes : 14\n" in outstream.getvalue()
+    assert "IO speeds:\n" in outstream.getvalue()
+    assert "\tbaudspeed : {0}\n".format(speeds['baudspeed']) in outstream.getvalue()
+    assert "\tbaudratio : {0}\n".format(speeds['baudratio']) in outstream.getvalue()
+    assert "\tbaudratio_avg : {0}\n".format(speeds['baudratio_avg']) in outstream.getvalue()
+    assert "\tbaudspeed_avg : {0}\n".format(speeds['baudspeed_avg']) in outstream.getvalue()
+    assert "Framing:\n" in outstream.getvalue()
+    assert "\ttx_encoded_frames : 1\n" in outstream.getvalue()
+    assert "\trx_uncomplete_frames : 0\n" in outstream.getvalue()
+    assert "\ttx_processed_bytes : 12\n" in outstream.getvalue()
+    assert "\trx_complete_frames : 1\n" in outstream.getvalue()
+    assert "\ttx_escaped_bytes : 0\n" in outstream.getvalue()
+    assert "\trx_discarded_bytes : 0\n" in outstream.getvalue()
+    assert "\trx_processed_bytes : 14\n" in outstream.getvalue()
+    assert "\trx_escaped_bytes : 0\n" in outstream.getvalue()
+    assert "Protocol:\n" in outstream.getvalue()
+    assert "\ttx_encoded_frames : 1\n" in outstream.getvalue()
+    assert "\trx_corrupted_header : 0\n" in outstream.getvalue()
+    assert "\trx_decoded_frames : 1\n" in outstream.getvalue()
+    assert "\trx_corrupted_payload : 0\n" in outstream.getvalue()
+    assert "\trx_corrupted_crc : 0\n" in outstream.getvalue()
+    assert "\trx_corrupted_eol : 0\n" in outstream.getvalue()
+    assert "\trx_corrupted_topic : 0\n" in outstream.getvalue()
+
+    # Check stats are cleaned after restart
+    tr.authorizeConnect(True)
+    tlm.onecmd("serial com123")
+
+    clear(outstream)
+
+    tlm.onecmd("stats")
+
+    assert "Raw IO:\n" in outstream.getvalue()
+    assert "\trx_bytes : 0\n" in outstream.getvalue()
+    assert "IO speeds:\n" in outstream.getvalue()
+    assert "\tbaudspeed : 0.0\n" in outstream.getvalue()
+    assert "\tbaudratio : 0.0\n" in outstream.getvalue()
+    assert "\tbaudratio_avg : 0.0\n" in outstream.getvalue()
+    assert "\tbaudspeed_avg : 0.0\n" in outstream.getvalue()
+    assert "Framing:\n" in outstream.getvalue()
+    assert "\ttx_encoded_frames : 0\n" in outstream.getvalue()
+    assert "\trx_uncomplete_frames : 0\n" in outstream.getvalue()
+    assert "\ttx_processed_bytes : 0\n" in outstream.getvalue()
+    assert "\trx_complete_frames : 0\n" in outstream.getvalue()
+    assert "\ttx_escaped_bytes : 0\n" in outstream.getvalue()
+    assert "\trx_discarded_bytes : 0\n" in outstream.getvalue()
+    assert "\trx_processed_bytes : 0\n" in outstream.getvalue()
+    assert "\trx_escaped_bytes : 0\n" in outstream.getvalue()
+    assert "Protocol:\n" in outstream.getvalue()
+    assert "\ttx_encoded_frames : 0\n" in outstream.getvalue()
+    assert "\trx_corrupted_header : 0\n" in outstream.getvalue()
+    assert "\trx_decoded_frames : 0\n" in outstream.getvalue()
+    assert "\trx_corrupted_payload : 0\n" in outstream.getvalue()
+    assert "\trx_corrupted_crc : 0\n" in outstream.getvalue()
+    assert "\trx_corrupted_eol : 0\n" in outstream.getvalue()
+    assert "\trx_corrupted_topic : 0\n" in outstream.getvalue()
