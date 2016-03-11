@@ -280,6 +280,28 @@ Usage: disconnect
             self.runner.disconnect()
             self.stdout.write("Disconnected.\n")
             logger.info("Disconnected.")
+
+            measures = self.transport.stats()
+
+            for key,item in measures.items():
+                logger.info("Raw IO : %s : %s\n" % (key,item))
+
+            measures = self.runner.stats()
+
+            for key,item in measures.items():
+                logger.info("IO speeds : %s : %s\n" % (key,item))
+
+            measures = self.telemetry.stats()
+
+            for key,item in measures['framing'].items():
+                logger.info("Framing : %s : %s\n" % (key,item))
+
+            for key,item in measures['protocol'].items():
+                logger.info("Protocol : %s : %s\n" % (key,item))
+
+            logger.info("Logged session statistics.")
+
+
         except:
             logger.warn("Already disconnected. Continuing happily.")
 
@@ -305,8 +327,6 @@ of the maximum baudrate is being used, etc.
 
 Usage: stats
         """
-
-
         measures = self.transport.stats()
 
         self.stdout.write("Raw IO:\n")
@@ -336,6 +356,7 @@ Exits the terminal application.
 Usage: quit
         """
         self.runner.terminate()
+        self.do_disconnect("")
         self.stdout.write("Good Bye!\n")
         logger.info("Application quit.")
         exit()
