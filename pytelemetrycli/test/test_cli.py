@@ -248,7 +248,7 @@ def test_disconnect_quit(fixturefortests):
     clear(outstream)
 
     pytest.raises(SystemExit, tlm.onecmd, "quit")
-    assert outstream.getvalue() == "Good Bye!\n"
+    assert outstream.getvalue() == "Disconnected.\nGood Bye!\n"
 
     clear(outstream)
 
