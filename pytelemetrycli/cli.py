@@ -57,6 +57,7 @@ class Application (cmd.Cmd):
         else:
             self.transport = transport
         self.telemetry = Pytelemetry(self.transport)
+
         self.topics = Topics()
         self.plots = []
         self.plotsLock = Lock()
@@ -65,6 +66,7 @@ class Application (cmd.Cmd):
                              self.plots,
                              self.plotsLock,
                              self.topics)
+
         self.telemetry.subscribe(None,self.topics.process)
 
         self.types_lookup = {'--s'    :  'string',
@@ -115,6 +117,10 @@ Options:
             logger.info(s)
             self.topics.clear()
             logger.info("Cleared all topics for new session.")
+            self.transport.resetStats()
+            self.runner.resetStats()
+            self.telemetry.resetStats()
+            logger.info("Cleared all stats for new session.")
 
     @docopt_cmd
     def do_print(self, arg):
