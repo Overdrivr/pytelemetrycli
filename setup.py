@@ -10,7 +10,7 @@ with io.open('DESCRIPTION.rst', encoding="utf-8") as f:
 setup(
     name='pytelemetrycli',
 
-    version='1.0.4',
+    version='1.0.5',
 
     description='command-line interface for superior communication with embedded devices.',
     long_description=long_description,
@@ -54,7 +54,7 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['pytelemetry>1.1.4','pyserial>3.0.0','docopt','pyqtgraph','numpy','sortedcontainers',],
+    install_requires=['pytelemetry>1.1.6','pyserial>3.0.0','docopt','pyqtgraph','numpy','sortedcontainers',],
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
