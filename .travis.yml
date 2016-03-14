@@ -34,4 +34,4 @@ install:
 
 # command to run tests
 script:
-  - py.test --cov
+  - py.test -v --cov

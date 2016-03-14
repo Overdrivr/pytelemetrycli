@@ -93,6 +93,15 @@ Plots <topic> in a graph window.
 Usage: plot <topic>
 ```
 
+### stats
+```bash
+Displays different metrics about the active transport (ex : serial port).
+This allows you to know if for instance corrupted frames are received, what fraction
+of the maximum baudrate is being used, etc.
+
+Usage: stats
+```
+
 ### disconnect
 ```bash
 Disconnects from any open connection.

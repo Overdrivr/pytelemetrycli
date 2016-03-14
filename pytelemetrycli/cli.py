@@ -57,6 +57,7 @@ class Application (cmd.Cmd):
         else:
             self.transport = transport
         self.telemetry = Pytelemetry(self.transport)
+
         self.topics = Topics()
         self.plots = []
         self.plotsLock = Lock()
@@ -65,6 +66,7 @@ class Application (cmd.Cmd):
                              self.plots,
                              self.plotsLock,
                              self.topics)
+
         self.telemetry.subscribe(None,self.topics.process)
 
         self.types_lookup = {'--s'    :  'string',
@@ -115,6 +117,10 @@ Options:
             logger.info(s)
             self.topics.clear()
             logger.info("Cleared all topics for new session.")
+            self.transport.resetStats()
+            self.runner.resetStats()
+            self.telemetry.resetStats()
+            logger.info("Cleared all stats for new session.")
 
     @docopt_cmd
     def do_print(self, arg):
@@ -146,7 +152,7 @@ Options:
 
         if s is not None:
             for i in s:
-                self.stdout.write("%i\n" % i)
+                self.stdout.write("{0}\n".format(i))
         else:
             logger.error("Could not retrieve {0} sample(s) under topic '{1}'.\n".format(amount,topic))
 
@@ -274,13 +280,35 @@ Usage: disconnect
             self.runner.disconnect()
             self.stdout.write("Disconnected.\n")
             logger.info("Disconnected.")
+
+            measures = self.transport.stats()
+
+            for key,item in measures.items():
+                logger.info("Raw IO : %s : %s" % (key,item))
+
+            measures = self.runner.stats()
+
+            for key,item in measures.items():
+                logger.info("IO speeds : %s : %s" % (key,item))
+
+            measures = self.telemetry.stats()
+
+            for key,item in measures['framing'].items():
+                logger.info("Framing : %s : %s" % (key,item))
+
+            for key,item in measures['protocol'].items():
+                logger.info("Protocol : %s : %s" % (key,item))
+
+            logger.info("Logged session statistics.")
+
+
         except:
             logger.warn("Already disconnected. Continuing happily.")
 
     @docopt_cmd
     def do_info(self, arg):
         """
-Disconnects from any open connection.
+Prints out cli.py full path, module version.
 
 Usage: info
         """
@@ -290,6 +318,37 @@ Usage: info
         except:
             self.stdout.write("- version : not found.\n")
 
+    @docopt_cmd
+    def do_stats(self, arg):
+        """
+Displays different metrics about the active transport (ex : serial port).
+This allows you to know if for instance corrupted frames are received, what fraction
+of the maximum baudrate is being used, etc.
+
+Usage: stats
+        """
+        measures = self.transport.stats()
+
+        self.stdout.write("Raw IO:\n")
+        for key,item in measures.items():
+            self.stdout.write("\t%s : %s\n" % (key,item))
+
+        measures = self.runner.stats()
+
+        self.stdout.write("IO speeds:\n")
+        for key,item in measures.items():
+            self.stdout.write("\t%s : %s\n" % (key,item))
+
+        measures = self.telemetry.stats()
+
+        self.stdout.write("Framing:\n")
+        for key,item in measures['framing'].items():
+            self.stdout.write("\t%s : %s\n" % (key,item))
+
+        self.stdout.write("Protocol:\n")
+        for key,item in measures['protocol'].items():
+            self.stdout.write("\t%s : %s\n" % (key,item))
+
     def do_quit(self, arg):
         """
 Exits the terminal application.
@@ -297,6 +356,7 @@ Exits the terminal application.
 Usage: quit
         """
         self.runner.terminate()
+        self.do_disconnect("")
         self.stdout.write("Good Bye!\n")
         logger.info("Application quit.")
         exit()

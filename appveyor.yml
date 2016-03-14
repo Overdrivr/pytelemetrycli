@@ -43,4 +43,4 @@ install:
   - "cd %APPVEYOR_BUILD_FOLDER%"
   - "SET PYTHONPATH=%PYTHONPATH%;%APPVEYOR_BUILD_FOLDER%"
 test_script:
-  - "%MINICONDA%\\Scripts\\py.test --cov"
+  - "%MINICONDA%\\Scripts\\py.test -v --cov"
