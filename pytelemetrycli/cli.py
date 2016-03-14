@@ -284,20 +284,20 @@ Usage: disconnect
             measures = self.transport.stats()
 
             for key,item in measures.items():
-                logger.info("Raw IO : %s : %s\n" % (key,item))
+                logger.info("Raw IO : %s : %s" % (key,item))
 
             measures = self.runner.stats()
 
             for key,item in measures.items():
-                logger.info("IO speeds : %s : %s\n" % (key,item))
+                logger.info("IO speeds : %s : %s" % (key,item))
 
             measures = self.telemetry.stats()
 
             for key,item in measures['framing'].items():
-                logger.info("Framing : %s : %s\n" % (key,item))
+                logger.info("Framing : %s : %s" % (key,item))
 
             for key,item in measures['protocol'].items():
-                logger.info("Protocol : %s : %s\n" % (key,item))
+                logger.info("Protocol : %s : %s" % (key,item))
 
             logger.info("Logged session statistics.")
 
