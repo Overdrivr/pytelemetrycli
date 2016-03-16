@@ -6,18 +6,27 @@
 
 ## pytelemetry command line interface
 
-This tool is a command-line interface (CLI). It enables superior communication with any embedded device. It was designed for:
+This command-line interface (CLI) enables data visualization and communication with embedded platforms.
 
-* **fast prototyping and debugging**. Set everything up in a few minutes and start debugging any embedded device efficiently. Forget about `printf`. Forever.
-* **communication-based applications**. Stop re-writing custom protocols for each new project.
-* **real-time update of embedded application parameters**. Tune your application without loosing time compiling & flashing just for parameter tuning.
-* **plot** data from the device in real-time. Standard linear data is supported, but also arrays, sparse arrays. In the future, also Matrices, XYZ, and RGB-type codes.
-* **Reusability**. The protocol is highly flexible, loosely coupled to your application. It can be used in a wide number of application scenarios.
+* **Fast prototyping and debugging**. Set everything up in a few minutes and start debugging any embedded device efficiently. Forget about `printf`. Forever.
+* **Communication-based applications**. Stop re-writing custom protocols for each new project.
+* **Real-time update of embedded application parameters**. Tune your application without loosing time compiling & flashing.
+* **Data-plotting**. Plot data from the device in no time, with a single command. Time-varying values, arrays and sparse arrays.
+* **Reusability**. Highly flexible protocol, loosely coupled to your application. Suited for a wide number of application scenarios.
+
+`Arduino` and `ARM mbed` are currently officially supported.
+
+## interface and plot
+Aan example of listing serial ports `ls -s`, connecting to a device through COM20 `serial com20 --bauds 115200`, listing all received topics `ls` and opening a plot on topic touch `plot touch`
+
+![Console example](https://raw.githubusercontent.com/Overdrivr/pytelemetrycli/master/console.png)
+
+![Plot example](https://raw.githubusercontent.com/Overdrivr/pytelemetrycli/master/graph.png)
+
 
 ## overview
-This CLI provides a set of commands to connect to a device, read, plot, write data on it, log any received and sent data.
 
-*In the future*: export to Excel and CSV and replay command in the CLI for offline inspection.
+The CLI provides a set of commands to connect to a device, read, plot, write data on it, log any received and sent data.
 
 The communication protocol that carry all exchanged information is implemented in Python and C:
 * [`pytelemetry`](https://github.com/Overdrivr/pytelemetry)[![PyPI version](https://badge.fury.io/py/pytelemetry.svg)](https://badge.fury.io/py/pytelemetry) for scripting the communication from your PC
@@ -25,14 +34,57 @@ The communication protocol that carry all exchanged information is implemented i
 
 Officially supported embedded platforms are for now `Arduino` and `Mbed`.
 
-See the [central documentation](https://github.com/Overdrivr/Telemetry/wiki) for installation instructions, tutorials, description of the protocol, etc.
+This CLI runs on Windows, Mac OS and Linux.
 
-## interface and plot widget
-Aan example of listing serial ports `ls -s`, connecting to a device through COM20 `serial com20 --bauds 115200`, listing all received topics `ls` and opening a plot on topic touch `plot touch`
+See the [central documentation](https://github.com/Overdrivr/Telemetry/wiki) for installation tutorials and description of the protocol.
 
-![Console example](https://raw.githubusercontent.com/Overdrivr/pytelemetrycli/master/console.png)
 
-![Plot example](https://raw.githubusercontent.com/Overdrivr/pytelemetrycli/master/graph.png)
+## installation
+`pytelemetrycli` requires python 3.3+, PyQt4 and numpy.
+
+### Windows
+It is recommended to download [`numpy`](http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy) and [`PyQt4`](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pyqt4) wheels python packages (courtesy of Christoph Gohlke).
+
+In case you were wondering, **no** you **don't** have to install Qt. The binary wheel is enough.
+
+Install with `pip` the downloaded files
+
+```bash
+pip install numpy-x.xx.x+vanilla-cp3x-none-winxxx.whl
+pip install PyQt4-x.xx.x-cp3x-none-winxxx.whl
+```
+
+Then, simply install `pytelemetrycli` with pip as usual
+
+```bash
+pip install pytelemetrycli
+```
+
+### Mac OS
+The easiest way to install numpy and PyQt4 seem to be using `homebrew`.
+lease note that you should also have installed python 3.5 with homebrew for this to work correctly.
+Also, avoid to have another python 3.5 distribution on your system otherwise you will face import issues as well.
+
+```bash
+brew install python3
+brew install pyqt --with-python3
+pip3 install pytelemetrycli
+```
+
+### Linux
+
+The setup used for testing relies on miniconda.
+```
+conda install numpy
+conda install pyqt
+conda install pip
+pip install pytelemetrycli
+```
+However, if you have PyQt4 and numpy already installed in your directory, simply run
+```
+pip install pytelemetrycli
+```
+
 
 ## List of commands
 The command line interface can be started like this
@@ -101,8 +153,8 @@ of the maximum baudrate is being used, etc.
 
 Usage: stats
 ```
-
 ### disconnect
+
 ```bash
 Disconnects from any open connection.
 
@@ -115,49 +167,8 @@ Exits the terminal application.
 
 Usage: quit
 ```
+# Future milestones
 
-## installation
-`pytelemetrycli` requires python 3.3+, PyQt4 and numpy.
-
-### Windows
-It is recommended to download [`numpy`](http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy) and [`PyQt4`](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pyqt4) wheels python packages (courtesy of Christoph Gohlke).
-
-In case you were wondering, **no** you **don't** have to install Qt. The binary wheel is enough.
-
-Then install with pip the downloaded files
-
-```bash
-pip install numpy-x.xx.x+vanilla-cp3x-none-winxxx.whl
-pip install PyQt4-x.xx.x-cp3x-none-winxxx.whl
-```
-
-Then, simply install `pytelemetrycli` with pip as usual
-
-```bash
-pip install pytelemetrycli
-```
-
-### Mac OS
-The easiest way to install numpy and PyQt4 seem to be using `homebrew`.
-lease note that you should also have installed python 3.5 with homebrew for this to work correctly.
-Also, avoid to have another python 3.5 distribution on your system otherwise you will face import issues as well.
-
-```bash
-brew install python3
-brew install pyqt --with-python3
-pip3 install pytelemetrycli
-```
-
-### Linux
-
-The setup used for testing relies on miniconda.
-```
-conda install numpy
-conda install pyqt
-conda install pip
-pip install pytelemetrycli
-```
-However, if you have PyQt4 and numpy already installed in your directory, simply run
-```
-pip install pytelemetrycli
-```
+* improve and truly centralize documentation
+* export to Excel and CSV and replay command in the CLI for offline inspection.
+* support of Matrices, XYZ, and RGB-type codes.
