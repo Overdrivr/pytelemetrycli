@@ -92,6 +92,18 @@ def test_pub_ls(fixturefortests):
 
     clear(outstream)
 
+    tlm.onecmd("pub --i16 topicC 0.0") # Casting from float to int generates negligeable error. Publish will succeed
+    tlm.runner.update()
+    assert outstream.getvalue() == "Published on topic 'topicC' : 0 [int16]\n"
+
+    clear(outstream)
+
+    tlm.onecmd("pub --i16 topicC 0.1") # Casting from float to int generates non-negligeable error. Publish will fail
+    tlm.runner.update()
+    assert outstream.getvalue() == "Aborted : Wrote decimal number (0.1) with integer flag.\n"
+
+    clear(outstream)
+
 def test_connect_fail(fixturefortests):
     tr, outstream, tlm = fixturefortests
     clear(outstream)
