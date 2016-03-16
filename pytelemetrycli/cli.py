@@ -6,6 +6,7 @@ from pytelemetry import Pytelemetry
 import pytelemetry.transports.serialtransport as transports
 from pytelemetrycli.topics import Topics
 from pytelemetrycli.runner import Runner
+from pytelemetrycli.tools import isclose
 from serial.tools import list_ports
 from pytelemetrycli.ui.superplot import Superplot, PlotType
 from threading import Lock
@@ -238,7 +239,21 @@ Usage: pub (--u8 | --u16 | --u32 | --i8 | --i16 | --i32 | --f32 | --s) <topic> <
         if arg['--f32']:
             arg['<value>'] = float(arg['<value>'])
         elif not arg['--s']:
-            arg['<value>'] = int(arg['<value>'])
+            try:
+                arg['<value>'] = int(arg['<value>'])
+            except:
+                # User most likely entered a float with an integer flag
+                inter = float(arg['<value>'])
+                rounded = int(inter)
+
+                if isclose(inter,rounded):
+                    arg['<value>'] = rounded
+                else:
+                    s = "Aborted : Wrote decimal number ({0}) with integer flag.".format(arg['<value>'])
+                    self.stdout.write(s + "\n")
+                    logger.warning(s)
+                    return
+
 
         subset = {k: arg[k] for k in ("--u8","--u16","--u32","--i8","--i16","--i32","--f32","--s")}
 
@@ -255,8 +270,8 @@ Usage: pub (--u8 | --u16 | --u32 | --i8 | --i16 | --i32 | --f32 | --s) <topic> <
 
         self.telemetry.publish(arg['<topic>'],arg['<value>'],valtype)
 
-        s = "Published on topic '{0}' : {1} [{2}]\n".format(arg['<topic>'], arg['<value>'],valtype)
-        self.stdout.write(s)
+        s = "Published on topic '{0}' : {1} [{2}]".format(arg['<topic>'], arg['<value>'],valtype)
+        self.stdout.write(s + "\n")
         logger.info(s)
 
     @docopt_cmd
