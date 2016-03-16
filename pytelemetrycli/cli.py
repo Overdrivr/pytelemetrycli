@@ -268,7 +268,12 @@ Usage: pub (--u8 | --u16 | --u32 | --i8 | --i16 | --i32 | --f32 | --s) <topic> <
                 .format(arg))
             return
 
-        self.telemetry.publish(arg['<topic>'],arg['<value>'],valtype)
+        try:
+            self.telemetry.publish(arg['<topic>'],arg['<value>'],valtype)
+        except writeTimeoutError as e:
+            self.stdout.write("Pub failed. Connection most likely terminated.")
+            logger.error("Pub failed. Connection most likely terminated. exception : %s" % e)
+            return
 
         s = "Published on topic '{0}' : {1} [{2}]".format(arg['<topic>'], arg['<value>'],valtype)
         self.stdout.write(s + "\n")
