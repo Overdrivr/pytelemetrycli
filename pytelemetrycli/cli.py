@@ -8,6 +8,7 @@ from pytelemetrycli.topics import Topics
 from pytelemetrycli.runner import Runner
 from pytelemetrycli.tools import isclose
 from serial.tools import list_ports
+from serial import SerialTimeoutException
 from pytelemetrycli.ui.superplot import Superplot, PlotType
 from threading import Lock
 from pytelemetrycli.initialization import init_logging
@@ -270,9 +271,13 @@ Usage: pub (--u8 | --u16 | --u32 | --i8 | --i16 | --i32 | --f32 | --s) <topic> <
 
         try:
             self.telemetry.publish(arg['<topic>'],arg['<value>'],valtype)
-        except writeTimeoutError as e:
+        except SerialTimeoutException as e:
             self.stdout.write("Pub failed. Connection most likely terminated.")
             logger.error("Pub failed. Connection most likely terminated. exception : %s" % e)
+            return
+        except AttributeError as e:
+            self.stdout.write("Pub failed because you are not connected to any device. Connect first using `serial` command.")
+            logger.warning("Trying to publish while not connected. exception : %s" % e)
             return
 
         s = "Published on topic '{0}' : {1} [{2}]".format(arg['<topic>'], arg['<value>'],valtype)
