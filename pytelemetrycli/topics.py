@@ -121,5 +121,5 @@ A class that manages a collection of `Topic`s.
     def intransfer(self,topic):
         return topic in self.transfers
 
-    def xytype(self,topic):
-        return self.topic_list[topic]['type']
+    def has_indexed_data(self,topic):
+        return self.topic_list[topic].has_indexed_data()
