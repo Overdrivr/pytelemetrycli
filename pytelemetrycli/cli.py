@@ -202,11 +202,14 @@ Usage: plot <topic>
             logger.warn(s)
             return
 
-        plotTypeFlag = self.topics.xytype(arg['<topic>'])
-        plotType = PlotType.linear
+        has_indexes = self.topics.has_indexed_data(arg['<topic>'])
 
-        if plotTypeFlag == 'indexed':
+        if has_indexes:
             plotType = PlotType.indexed
+            transferType = "indexed"
+        else:
+            plotType = PlotType.linear
+            transferType = "linear"
 
         p = Superplot(topic,plotType)
         q, ctrl = p.start()
@@ -223,9 +226,9 @@ Usage: plot <topic>
 
         self.plotsLock.release()
 
-        self.topics.transfer(topic,q)
+        self.topics.transfer(topic,q, transfer_type=transferType)
 
-        s = "Plotting '{0}' in mode [{1}].\n".format(topic,plotTypeFlag)
+        s = "Plotting '{0}' in mode [{1}].\n".format(topic,transferType)
         logger.info(s)
         self.stdout.write(s)
 
