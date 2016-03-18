@@ -1,92 +1,113 @@
 from sortedcontainers import SortedDict
 from logging import getLogger
 
+class Topic:
+    """
+A class to store and manage all data under a given topic
+    """
+    def __init__(self, name, source='remote'):
+        self.raw = []
+        self.indexes = SortedDict()
+        self.source = source
+        self.name = name
+
+    def has_indexed_data(self):
+        return len(self.indexes) > 0
+
+    def new_sample(self, sample, options):
+        if options:
+            self.indexes[options['index']] = sample
+        else:
+            self.raw.append(sample)
+
 class Topics:
+    """
+A class that manages a collection of `Topic`s.
+
+    """
     def __init__(self):
-        self.topics = dict()
+        self.topic_list = SortedDict()
         self.transfers = dict()
         self.logger = getLogger('topics')
         self.logger.info('started session')
 
     def clear(self):
         self.logger.info('Cleared all topics and received data')
-        self.topics = dict()
+        self.topic_list = dict()
         self.transfers = dict()
 
-    def process(self,topic, payload, options=None):
-        if not topic in self.topics:
-            self.topics[topic] = dict()
-            self.topics[topic]['raw'] = [] # For raw data
-            self.topics[topic]['xy'] = SortedDict() # For indexed data
-            if options:
-                self.topics[topic]['type'] = 'indexed'
-                self.logger.info('new:topic:indexed ' + topic)
-            else:
-                self.topics[topic]['type'] = 'linear'
-                self.logger.info('new:topic:linear ' + topic)
+    def create(self, topic, source='remote'):
+        # Create the topic if it doesn't exist already
+        if not topic in self.topic_list:
+            self.topic_list[topic] = Topic(topic,source=source)
+            self.logger.info('new:topic ' + topic)
 
-        t = self.topics[topic]
-        t['raw'].append(payload)
+    def process(self, topic, payload, options=None):
+        # Create the topic if it doesn't exist already
+        self.create(topic)
 
+        # Add the new sample
+        self.topic_list[topic].new_sample(payload,options)
+
+        # logging
         if options:
             self.logger.debug('new sample | {0} [{1}] {2}'.format(topic, options['index'], payload))
         else:
             self.logger.debug('new sample | {0} {1}'.format(topic, payload))
 
-        # If topic is of type indexed data, also store in ordered dict
-        if options:
-            t['xy'][options['index']] = payload
-
         # If there is an active transfer, transfer received data to the queue
         if topic in self.transfers:
-            # For indexed data, provide the index for x and payload for y
-            if t['type'] == 'indexed' and options is not None:
+            # If transfer requires indexed data, check there is an index
+            if self.transfers[topic]['type'] == 'indexed' and options is not None:
                 x = options['index']
                 self.transfers[topic]['queue'].put([x, payload])
             # For linear data, provide sample id for x and payload for y
-            elif t['type'] == 'linear':
+            elif self.transfers[topic]['type'] == 'linear':
                 x = self.transfers[topic]['lastindex']
                 self.transfers[topic]['queue'].put([x, payload])
                 self.transfers[topic]['lastindex'] += 1
-            else:
-                self.logger.warning('unknown topic type {0} | {1}'.format(t['type'], topic))
 
-    def ls(self):
-        return sorted(self.topics.keys())
+    def ls(self,source="remote"):
+        if source is None:
+            return [t.name for t in self.topic_list.keys()]
+        else:
+            return [t.name for t in self.topic_list.values() if t.source == source]
 
     def samples(self,topic,amount=1):
-        if not topic in self.topics:
+        if not topic in self.topic_list:
             return None
+
         if amount == 0 or amount is None:
-            return self.topics[topic]['raw']
-        # TODO : Print indexed data ?
-        return self.topics[topic]['raw'][-amount:]
+            return self.topic_list[topic].raw
+
+        return self.topic_list[topic].raw[-amount:]
 
     def count(self,topic):
-        if not topic in self.topics:
+        if not topic in self.topic_list:
             return 0
-        # TODO : what to do on indexed data ?
-        return len(self.topics[topic]['raw'])
+
+        return len(self.topic_list[topic].raw)
 
     def exists(self,topic):
-        return topic in self.topics
+        return topic in self.topic_list
 
-    def transfer(self,topic,queue):
+    def transfer(self, topic, queue, transfer_type = "linear"):
         # If the topic data is not already transfered to some queue
         if not topic in self.transfers:
             self.transfers[topic] = dict()
             self.transfers[topic]['queue'] = queue
             self.transfers[topic]['lastindex'] = 0
+            self.transfers[topic]['type'] = transfer_type
 
             self.logger.info('start transfer | {0}'.format(topic))
 
             # If there is already existing data under the topic
-            if topic in self.topics:
-                if self.topics[topic]['type'] == 'indexed':
-                    for key, value in self.topics[topic]['xy'].iteritems():
+            if topic in self.topic_list:
+                if transfer_type == 'indexed':
+                    for key, value in self.topic_list[topic].indexes.iteritems():
                         queue.put([key, value])
-                elif self.topics[topic]['type'] == 'linear':
-                    for item in self.topics[topic]['raw']:
+                elif transfer_type == 'linear':
+                    for item in self.topic_list[topic].raw:
                         queue.put([self.transfers[topic]['lastindex'], item])
                         self.transfers[topic]['lastindex'] += 1
 
@@ -101,4 +122,4 @@ class Topics:
         return topic in self.transfers
 
     def xytype(self,topic):
-        return self.topics[topic]['type']
+        return self.topic_list[topic]['type']
