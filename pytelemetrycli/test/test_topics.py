@@ -67,7 +67,7 @@ def test_transfert_queue_indexed_data():
 
     assert q.empty()
 
-    topic.transfer(t1,q)
+    topic.transfer(t1,q,transfer_type='indexed')
 
     assert topic.intransfer(t1) == True
 
@@ -99,3 +99,30 @@ def test_transfert_queue_indexed_data():
     topic.process(t1,333, {'index': 8})
 
     assert q.qsize() == 0
+
+
+def test_different_sources():
+    t1 = "remoteTopic"
+    t2 = "systemTopic"
+    topics = Topics()
+
+    topics.process(t1,123)
+    topics.process(t1,456)
+    topics.process(t1,789)
+
+    assert t1 in topics.ls()
+    assert len(topics.ls()) == 1
+
+    topics.create(t2,source="cli")
+
+    topics.process(t2,123)
+    topics.process(t2,456)
+    topics.process(t2,789)
+
+    assert t1 in topics.ls()
+    assert t2 not in topics.ls()
+    assert len(topics.ls()) == 1
+
+    assert t1 not in topics.ls(source="cli")
+    assert t2 in topics.ls(source="cli")
+    assert len(topics.ls(source="cli")) == 1
