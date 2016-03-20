@@ -69,9 +69,9 @@ A class that manages a collection of `Topic`s.
 
     def ls(self,source="remote"):
         if source is None:
-            return [t.name for t in self.topic_list.keys()]
+            return sorted([t.name for t in self.topic_list.keys()])
         else:
-            return [t.name for t in self.topic_list.values() if t.source == source]
+            return sorted([t.name for t in self.topic_list.values() if t.source == source])
 
     def samples(self,topic,amount=1):
         if not topic in self.topic_list:

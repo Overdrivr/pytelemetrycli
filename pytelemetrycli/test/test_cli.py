@@ -245,7 +245,7 @@ def test_count(fixturefortests):
 
     tlm.onecmd("count")
     tlm.runner.update()
-    assert outstream.getvalue() == "foo : 2\nbar : 1\n"
+    assert outstream.getvalue() == "bar : 1\nfoo : 2\n"
 
     clear(outstream)
 
