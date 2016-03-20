@@ -24,6 +24,9 @@ class Runner:
         # Create monitoring topics
         self.topics.create("baudspeed",source="cli")
         self.topics.create("baudspeed_avg",source="cli")
+        self.topics.create("rx_in_waiting",source="cli")
+        self.topics.create("rx_in_waiting_max",source="cli")
+        self.topics.create("rx_in_waiting_avg",source="cli")
 
         # Connection options
         options = dict()
@@ -79,9 +82,9 @@ class Runner:
         if difft > 0.05 :
             self.lasttime = current
 
-            current = self.transport.stats()['rx_bytes']
-            diff = current - self.lastamount
-            self.lastamount = current
+            measures = self.transport.stats()
+            diff = measures['rx_bytes'] - self.lastamount
+            self.lastamount = measures['rx_bytes']
 
             self.baudspeed = diff / difft
 
@@ -92,6 +95,9 @@ class Runner:
             # Send cli system data to the topics so that they can be plotted.
             self.topics.process("baudspeed",self.baudspeed)
             self.topics.process("baudspeed_avg",self.baudspeed_avg)
+            self.topics.process("rx_in_waiting",measures['rx_in_waiting'])
+            self.topics.process("rx_in_waiting_max",measures['rx_in_waiting_max'])
+            self.topics.process("rx_in_waiting_avg",measures['rx_in_waiting_avg'])
 
         # Poll each poll pipe to see if user closed them
         plotToDelete = None
