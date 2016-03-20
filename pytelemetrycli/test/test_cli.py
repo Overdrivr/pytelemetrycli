@@ -33,7 +33,7 @@ class TransportMock:
             self.q.put(c)
     def writeable(self):
         return True
-    def resetStats(self):
+    def resetStats(self,averaging_window=1):
         self.counter = 0
     def stats(self):
         return {
