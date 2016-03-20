@@ -106,8 +106,8 @@ Options:
 
         self.topics.clear()
         logger.info("Cleared all topics for new session.")
-        
-        self.transport.resetStats()
+
+        self.transport.resetStats(averaging_window=10)
         self.runner.resetStats()
         self.telemetry.resetStats()
         logger.info("Cleared all stats for new session.")
