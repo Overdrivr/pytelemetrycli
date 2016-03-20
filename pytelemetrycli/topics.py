@@ -26,14 +26,13 @@ A class that manages a collection of `Topic`s.
 
     """
     def __init__(self):
-        self.topic_list = SortedDict()
-        self.transfers = dict()
         self.logger = getLogger('topics')
         self.logger.info('started session')
+        self.clear()
 
     def clear(self):
         self.logger.info('Cleared all topics and received data')
-        self.topic_list = dict()
+        self.topic_list = SortedDict()
         self.transfers = dict()
 
     def create(self, topic, source='remote'):
@@ -67,7 +66,7 @@ A class that manages a collection of `Topic`s.
                 self.transfers[topic]['queue'].put([x, payload])
                 self.transfers[topic]['lastindex'] += 1
 
-    def ls(self,source="remote"):
+    def ls(self,source='remote'):
         if source is None:
             return sorted([t.name for t in self.topic_list.keys()])
         else:
