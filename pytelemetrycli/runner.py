@@ -21,9 +21,15 @@ class Runner:
         self.resetStats()
 
     def connect(self,port,bauds):
+        # Create monitoring topics
+        self.topics.create("baudspeed",source="cli")
+        self.topics.create("baudspeed_avg",source="cli")
+
+        # Connection options
         options = dict()
         options['port'] = port
         options['baudrate'] = bauds
+
         self.baudrate = bauds
         self.transport.connect(options)
         self.connected.set()
@@ -82,9 +88,10 @@ class Runner:
             # Compute rolling average baud speed on about 1 second window
             n = 20
             self.baudspeed_avg = (self.baudspeed + n * self.baudspeed_avg) / (n + 1)
-            # Need a dedicated flag with ls to display program parameters
-            #self.topics.process("baudspeed",self.baudspeed)
-            #self.topics.process("baudspeed_avg",self.baudspeed_avg)
+
+            # Send cli system data to the topics so that they can be plotted.
+            self.topics.process("baudspeed",self.baudspeed)
+            self.topics.process("baudspeed_avg",self.baudspeed_avg)
 
         # Poll each poll pipe to see if user closed them
         plotToDelete = None
