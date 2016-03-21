@@ -34,4 +34,4 @@ install:
 
 # command to run tests
 script:
-  - py.test -v --timeout=100
+  - py.test -v --cov --timeout=100

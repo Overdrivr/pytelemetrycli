@@ -43,4 +43,4 @@ install:
   - "%MINICONDA%\\Scripts\\pip.exe install -r dev-requirements.txt"
   - "SET PYTHONPATH=%PYTHONPATH%;%APPVEYOR_BUILD_FOLDER%"
 test_script:
-  - "%MINICONDA%\\Scripts\\py.test -v --timeout=100"
+  - "%MINICONDA%\\Scripts\\py.test -v --cov --timeout=100"
