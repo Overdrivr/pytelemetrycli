@@ -37,7 +37,13 @@ class TransportMock:
         self.counter = 0
     def stats(self):
         return {
-        "rx_bytes": self.counter
+        "rx_bytes": self.counter,
+        "tx_bytes"  : 0,
+        "rx_chunks" : 0,
+        "tx_chunks"  : 0,
+        "rx_in_waiting" : 0,
+        "rx_in_waiting_avg" : 0,
+        "rx_in_waiting_max" : 0
         }
 
 # To be done
