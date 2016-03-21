@@ -39,8 +39,8 @@ install:
   - "%MINICONDA%\\Scripts\\conda install numpy -y -q"
   - "%MINICONDA%\\Scripts\\conda install pyqt -y -q"
   - "%MINICONDA%\\Scripts\\conda install pip -y -q"
-  - "%MINICONDA%\\Scripts\\pip.exe install pytelemetry docopt sortedcontainers pyqtgraph pytest-cov"
   - "cd %APPVEYOR_BUILD_FOLDER%"
+  - "%MINICONDA%\\Scripts\\pip.exe install -r dev-requirements.txt"
   - "SET PYTHONPATH=%PYTHONPATH%;%APPVEYOR_BUILD_FOLDER%"
 test_script:
-  - "%MINICONDA%\\Scripts\\py.test -v --cov"
+  - "%MINICONDA%\\Scripts\\py.test -v --timeout=100"
