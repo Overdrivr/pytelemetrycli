@@ -29,9 +29,9 @@ install:
   - conda install numpy -y -q
   - conda install pyqt -y -q
   - conda install pip -y -q
-  - pip install pytelemetry docopt sortedcontainers pyqtgraph pytest-cov
+  - pip install -r dev-requirements.txt
   - export PYTHONPATH="$PYTHONPATH:$TRAVIS_BUILD_DIR"
 
 # command to run tests
 script:
-  - py.test -v --cov
+  - py.test -v --cov --timeout=100

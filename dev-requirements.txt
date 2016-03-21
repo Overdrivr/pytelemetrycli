@@ -2,3 +2,5 @@ pytelemetry>1.1.0
 docopt
 sortedcontainers
 pyqtgraph
+pytest-cov
+pytest-timeout
