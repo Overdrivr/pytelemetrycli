@@ -71,10 +71,6 @@ class Runner:
         # Update protocol decoding
         self.telemetryWrapper.update()
 
-        # Protect the self.plots data structure from
-        # being modified from the main thread
-        self.plotsLock.acquire()
-
         # Update baudspeed value
         current = time.time()
         difft = current - self.lasttime
@@ -98,6 +94,10 @@ class Runner:
             self.topics.process("rx_in_waiting",measures['rx_in_waiting'])
             self.topics.process("rx_in_waiting_max",measures['rx_in_waiting_max'])
             self.topics.process("rx_in_waiting_avg",measures['rx_in_waiting_avg'])
+
+        # Protect the self.plots data structure from
+        # being modified from the main thread
+        self.plotsLock.acquire()
 
         # Poll each poll pipe to see if user closed them
         plotToDelete = None
