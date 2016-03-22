@@ -51,22 +51,14 @@ class SuperplotMock:
     def __init__(self):
         pass
 
-@pytest.fixture(scope="module")
-def fixturefortests():
-    transport = TransportMock()
-    outstream = io.StringIO()
-    tlm = Application(transport=transport,stdout=outstream)
-
-    return transport, outstream, tlm
-
 def clear(stream):
     stream.truncate(0)
     stream.seek(0)
 
-def test_pub_ls(fixturefortests):
-    tr, outstream, tlm = fixturefortests
-
-    clear(outstream)
+def test_pub_ls():
+    tr = TransportMock()
+    outstream = io.StringIO()
+    tlm = Application(transport=tr,stdout=outstream)
 
     tlm.onecmd("ls")
     tlm.runner.update()
@@ -110,9 +102,10 @@ def test_pub_ls(fixturefortests):
 
     clear(outstream)
 
-def test_connect_fail(fixturefortests):
-    tr, outstream, tlm = fixturefortests
-    clear(outstream)
+def test_connect_fail():
+    tr = TransportMock()
+    outstream = io.StringIO()
+    tlm = Application(transport=tr,stdout=outstream)
 
     tlm.onecmd("serial com123")
     tlm.runner.update()
@@ -132,9 +125,10 @@ def test_connect_fail(fixturefortests):
 
     clear(outstream)
 
-def test_print(fixturefortests):
-    tr, outstream, tlm = fixturefortests
-    clear(outstream)
+def test_print():
+    tr = TransportMock()
+    outstream = io.StringIO()
+    tlm = Application(transport=tr,stdout=outstream)
 
     tlm.onecmd("pub --i32 foo 2")
     tlm.runner.update()
@@ -208,10 +202,10 @@ def test_print(fixturefortests):
 
     clear(outstream)
 
-def test_count(fixturefortests):
-    tr, outstream, tlm = fixturefortests
-    clear(outstream)
-    tlm.topics.clear() # Clear all topics
+def test_count():
+    tr = TransportMock()
+    outstream = io.StringIO()
+    tlm = Application(transport=tr,stdout=outstream)
 
     tlm.onecmd("count")
     tlm.runner.update()
@@ -251,14 +245,17 @@ def test_count(fixturefortests):
 
     tlm.onecmd("count")
     tlm.runner.update()
+    print(outstream.getvalue())
+    for i in tlm.topics.topic_list.items():
+        print(i)
     assert outstream.getvalue() == "bar : 1\nfoo : 2\n"
 
     clear(outstream)
 
-def test_disconnect_quit(fixturefortests):
-    tr, outstream, tlm = fixturefortests
-    clear(outstream)
-    tlm.topics.clear() # Clear all topics
+def test_disconnect_quit():
+    tr = TransportMock()
+    outstream = io.StringIO()
+    tlm = Application(transport=tr,stdout=outstream)
 
     tlm.onecmd("disconnect")
     assert outstream.getvalue() == "Disconnected.\n"
@@ -270,31 +267,30 @@ def test_disconnect_quit(fixturefortests):
 
     clear(outstream)
 
-def test_wrong_command(fixturefortests):
-    tr, outstream, tlm = fixturefortests
-    clear(outstream)
-    tlm.topics.clear() # Clear all topics
+def test_wrong_command():
+    tr = TransportMock()
+    outstream = io.StringIO()
+    tlm = Application(transport=tr,stdout=outstream)
 
     # Just check it doesn't raises
     tlm.onecmd("pub foo --i32 123")
 
     clear(outstream)
 
-def test_info(fixturefortests):
-    tr, outstream, tlm = fixturefortests
-    clear(outstream)
-    tlm.topics.clear() # Clear all topics
-
+def test_info():
+    tr = TransportMock()
+    outstream = io.StringIO()
+    tlm = Application(transport=tr,stdout=outstream)
     # Just check it doesn't raise
     tlm.onecmd("info")
 
     clear(outstream)
 
-def test_topics_are_cleared_after_reconnect(fixturefortests):
-    tr, outstream, tlm = fixturefortests
+def test_topics_are_cleared_after_reconnect():
+    tr = TransportMock()
+    outstream = io.StringIO()
+    tlm = Application(transport=tr,stdout=outstream)
     tr.authorizeConnect(True)
-    clear(outstream)
-    tlm.topics.clear() # Clear all topics
 
     tlm.onecmd("serial com123")
     tlm.runner.update()
@@ -351,10 +347,10 @@ def test_topics_are_cleared_after_reconnect(fixturefortests):
     clear(outstream)
 
 
-def test_stats(fixturefortests):
-    tr, outstream, tlm = fixturefortests
-    clear(outstream)
-    tlm.topics.clear() # Clear all topics
+def test_stats():
+    tr = TransportMock()
+    outstream = io.StringIO()
+    tlm = Application(transport=tr,stdout=outstream)
 
     tr.resetStats()
     tlm.runner.resetStats()
