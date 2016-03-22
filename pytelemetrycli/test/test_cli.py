@@ -1,7 +1,6 @@
 from pytelemetrycli.cli import Application
 import pytest
-import unittest.mock as mock
-from unittest.mock import patch
+from unittest.mock import MagicMock
 import cmd
 import io
 import sys
@@ -15,8 +14,10 @@ class TransportMock:
     def authorizeConnect(self,value):
         self.canConnect = value
     def connect(self,options):
+        print("TransportMock trying to connect")
         if not self.canConnect:
             raise IOError("TransportMock denied connection")
+        print("TransportMock connected")
     def disconnect(self):
         pass
     def read(self, maxbytes=1):
@@ -45,11 +46,6 @@ class TransportMock:
         "rx_in_waiting_avg" : 0,
         "rx_in_waiting_max" : 0
         }
-
-# To be done
-class SuperplotMock:
-    def __init__(self):
-        pass
 
 def clear(stream):
     stream.truncate(0)
@@ -286,13 +282,16 @@ def test_info():
 
     clear(outstream)
 
+# issue here
 def test_topics_are_cleared_after_reconnect():
     tr = TransportMock()
     outstream = io.StringIO()
     tlm = Application(transport=tr,stdout=outstream)
+    tlm.runner._start_thread = MagicMock() # Mock _start_thread to avoid starting thread
     tr.authorizeConnect(True)
 
     tlm.onecmd("serial com123")
+
     tlm.runner.update()
     assert outstream.getvalue() == "Connected to com123 at 9600 (bauds).\n"
 
@@ -346,12 +345,13 @@ def test_topics_are_cleared_after_reconnect():
 
     clear(outstream)
 
-
+# Here too
 def test_stats():
     tr = TransportMock()
     outstream = io.StringIO()
     tlm = Application(transport=tr,stdout=outstream)
-
+    tlm.runner._start_thread = MagicMock() # Mock _start_thread to avoid starting thread
+    
     tr.resetStats()
     tlm.runner.resetStats()
     tlm.telemetry.resetStats()

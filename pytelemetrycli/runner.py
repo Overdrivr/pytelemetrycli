@@ -35,6 +35,10 @@ class Runner:
 
         self.baudrate = bauds
         self.transport.connect(options)
+
+        self._start_thread()
+        
+    def _start_thread(self):
         self.connected.set()
         self.thread = threading.Thread(target=self.run)
         self.thread.start()
