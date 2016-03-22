@@ -71,7 +71,29 @@ class Runner:
         # Update protocol decoding
         self.telemetryWrapper.update()
 
-        # Update baudspeed value
+        # Protect the self.plots data structure from
+        # being modified from the main thread
+        self.plotsLock.acquire()
+
+        # Poll each poll pipe to see if user closed them
+        plotToDelete = None
+        for p, i in zip(self.plots,range(len(self.plots))):
+            if p['ctrl'].poll():
+                if p['ctrl'].recv() == "closing":
+                    plotToDelete = i
+                    break
+
+        # Delete a plot if needed
+        if plotToDelete is not None:
+            self.plots[plotToDelete]['ctrl'].close()
+            topic = self.plots[plotToDelete]['topic']
+            self.topics.untransfer(topic)
+            self.plots.pop(plotToDelete)
+
+        self.plotsLock.release()
+
+    def computeStats(self):
+
         current = time.time()
         difft = current - self.lasttime
 
@@ -95,30 +117,11 @@ class Runner:
             self.topics.process("rx_in_waiting_max",measures['rx_in_waiting_max'])
             self.topics.process("rx_in_waiting_avg",measures['rx_in_waiting_avg'])
 
-        # Protect the self.plots data structure from
-        # being modified from the main thread
-        self.plotsLock.acquire()
-
-        # Poll each poll pipe to see if user closed them
-        plotToDelete = None
-        for p, i in zip(self.plots,range(len(self.plots))):
-            if p['ctrl'].poll():
-                if p['ctrl'].recv() == "closing":
-                    plotToDelete = i
-                    break
-
-        # Delete a plot if needed
-        if plotToDelete is not None:
-            self.plots[plotToDelete]['ctrl'].close()
-            topic = self.plots[plotToDelete]['topic']
-            self.topics.untransfer(topic)
-            self.plots.pop(plotToDelete)
-
-        self.plotsLock.release()
 
     def run(self):
         while self.running.is_set():
             if self.connected.is_set():
                 self.update()
+                self.computeStats()
             else:
                 time.sleep(0.5)
