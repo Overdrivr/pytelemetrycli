@@ -10,7 +10,7 @@ with io.open('DESCRIPTION.rst', encoding="utf-8") as f:
 setup(
     name='pytelemetrycli',
 
-    version='1.0.7',
+    version='1.1.0',
 
     description='command-line interface for data visualization and communication with embedded devices',
     long_description=long_description,
