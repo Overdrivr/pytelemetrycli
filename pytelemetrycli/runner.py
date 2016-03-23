@@ -21,11 +21,24 @@ class Runner:
         self.resetStats()
 
     def connect(self,port,bauds):
+        # Create monitoring topics
+        self.topics.create("baudspeed",source="cli")
+        self.topics.create("baudspeed_avg",source="cli")
+        self.topics.create("rx_in_waiting",source="cli")
+        self.topics.create("rx_in_waiting_max",source="cli")
+        self.topics.create("rx_in_waiting_avg",source="cli")
+
+        # Connection options
         options = dict()
         options['port'] = port
         options['baudrate'] = bauds
+
         self.baudrate = bauds
         self.transport.connect(options)
+
+        self._start_thread()
+        
+    def _start_thread(self):
         self.connected.set()
         self.thread = threading.Thread(target=self.run)
         self.thread.start()
@@ -66,26 +79,6 @@ class Runner:
         # being modified from the main thread
         self.plotsLock.acquire()
 
-        # Update baudspeed value
-        current = time.time()
-        difft = current - self.lasttime
-
-        if difft > 0.05 :
-            self.lasttime = current
-
-            current = self.transport.stats()['rx_bytes']
-            diff = current - self.lastamount
-            self.lastamount = current
-
-            self.baudspeed = diff / difft
-
-            # Compute rolling average baud speed on about 1 second window
-            n = 20
-            self.baudspeed_avg = (self.baudspeed + n * self.baudspeed_avg) / (n + 1)
-            # Need a dedicated flag with ls to display program parameters
-            #self.topics.process("baudspeed",self.baudspeed)
-            #self.topics.process("baudspeed_avg",self.baudspeed_avg)
-
         # Poll each poll pipe to see if user closed them
         plotToDelete = None
         for p, i in zip(self.plots,range(len(self.plots))):
@@ -103,9 +96,36 @@ class Runner:
 
         self.plotsLock.release()
 
+    def computeStats(self):
+
+        current = time.time()
+        difft = current - self.lasttime
+
+        if difft > 0.05 :
+            self.lasttime = current
+
+            measures = self.transport.stats()
+            diff = measures['rx_bytes'] - self.lastamount
+            self.lastamount = measures['rx_bytes']
+
+            self.baudspeed = diff / difft
+
+            # Compute rolling average baud speed on about 1 second window
+            n = 20
+            self.baudspeed_avg = (self.baudspeed + n * self.baudspeed_avg) / (n + 1)
+
+            # Send cli system data to the topics so that they can be plotted.
+            self.topics.process("baudspeed",self.baudspeed)
+            self.topics.process("baudspeed_avg",self.baudspeed_avg)
+            self.topics.process("rx_in_waiting",measures['rx_in_waiting'])
+            self.topics.process("rx_in_waiting_max",measures['rx_in_waiting_max'])
+            self.topics.process("rx_in_waiting_avg",measures['rx_in_waiting_avg'])
+
+
     def run(self):
         while self.running.is_set():
             if self.connected.is_set():
                 self.update()
+                self.computeStats()
             else:
                 time.sleep(0.5)

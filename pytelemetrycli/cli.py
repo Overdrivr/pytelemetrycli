@@ -104,6 +104,14 @@ Options:
                          .format(e))
             pass
 
+        self.topics.clear()
+        logger.info("Cleared all topics for new session.")
+
+        self.transport.resetStats(averaging_window=10)
+        self.runner.resetStats()
+        self.telemetry.resetStats()
+        logger.info("Cleared all stats for new session.")
+
         try:
             b = int(arg['--bauds'])
             self.runner.connect(arg['<port>'],b)
@@ -117,12 +125,6 @@ Options:
             s = "Connected to {0} at {1} (bauds).\n".format(arg['<port>'],b)
             self.stdout.write(s)
             logger.info(s)
-            self.topics.clear()
-            logger.info("Cleared all topics for new session.")
-            self.transport.resetStats()
-            self.runner.resetStats()
-            self.telemetry.resetStats()
-            logger.info("Cleared all stats for new session.")
 
     @docopt_cmd
     def do_print(self, arg):
@@ -168,15 +170,19 @@ Usage: ls [options]
 
 Options:
 -s, --serial     Use this flag to print a list of all available serial ports
-
+-c, --cli        Use this flag to print a list of protocol-related topics
         """
         if arg['--serial']:
             self.stdout.write("Available COM ports:\n")
             for port,desc,hid in list_ports.comports():
                 self.stdout.write("%s \t %s\n" % (port,desc))
         else:
+            if arg['--cli']:
+                for topic in self.topics.ls(source='cli'):
+                    self.stdout.write("%s\n" % topic)
+                return
 
-            for topic in self.topics.ls():
+            for topic in self.topics.ls(source='remote'):
                 self.stdout.write("%s\n" % topic)
 
 
@@ -202,11 +208,14 @@ Usage: plot <topic>
             logger.warn(s)
             return
 
-        plotTypeFlag = self.topics.xytype(arg['<topic>'])
-        plotType = PlotType.linear
+        has_indexes = self.topics.has_indexed_data(arg['<topic>'])
 
-        if plotTypeFlag == 'indexed':
+        if has_indexes:
             plotType = PlotType.indexed
+            transferType = "indexed"
+        else:
+            plotType = PlotType.linear
+            transferType = "linear"
 
         p = Superplot(topic,plotType)
         q, ctrl = p.start()
@@ -223,9 +232,9 @@ Usage: plot <topic>
 
         self.plotsLock.release()
 
-        self.topics.transfer(topic,q)
+        self.topics.transfer(topic,q, transfer_type=transferType)
 
-        s = "Plotting '{0}' in mode [{1}].\n".format(topic,plotTypeFlag)
+        s = "Plotting '{0}' in mode [{1}].\n".format(topic,transferType)
         logger.info(s)
         self.stdout.write(s)
 
