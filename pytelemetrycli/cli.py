@@ -88,14 +88,19 @@ class Application (cmd.Cmd):
     @docopt_cmd
     def do_serial(self, arg):
         """
-Connects pytelemetry to the serial port.
+List serial ports or connect to one of them.
 
-Usage: serial <port> [options]
+Usage: serial ((-l | --list) | <port> [options])
 
 Options:
--b X, --bauds X        Connection speed in bauds  [default: 9600]
-
+-b X, --bauds X         Connection speed in bauds  [default: 9600]
         """
+        if arg['--list'] or arg['-l']:
+            self.stdout.write("Available COM ports:\n")
+            for port,desc,hid in list_ports.comports():
+                self.stdout.write("%s \t %s\n" % (port,desc))
+            return
+
         try:
             self.runner.disconnect()
             logger.warn("User requested connect without desconnecting first.")
@@ -163,27 +168,23 @@ Options:
     @docopt_cmd
     def do_ls(self, arg):
         """
-Without options, prints a list of all received topics.
-With the --serial flag, prints a list of all available COM ports
+Prints available topics. Topics are basically labels under which data is available (for display, plot, etc).
+Data can come from remote source (a connected embedded device) or the command-line interface itself (reception speed, etc).
+
+Without flags, prints a list of remote topics.
 
 Usage: ls [options]
 
 Options:
--s, --serial     Use this flag to print a list of all available serial ports
--c, --cli        Use this flag to print a list of protocol-related topics
+-c, --cli       Prints all CLI topics. Use this to display topics for monitoring reception speed, errors amount, etc.
         """
-        if arg['--serial']:
-            self.stdout.write("Available COM ports:\n")
-            for port,desc,hid in list_ports.comports():
-                self.stdout.write("%s \t %s\n" % (port,desc))
-        else:
-            if arg['--cli']:
-                for topic in self.topics.ls(source='cli'):
-                    self.stdout.write("%s\n" % topic)
-                return
-
-            for topic in self.topics.ls(source='remote'):
+        if arg['--cli']:
+            for topic in self.topics.ls(source='cli'):
                 self.stdout.write("%s\n" % topic)
+            return
+
+        for topic in self.topics.ls(source='remote'):
+            self.stdout.write("%s\n" % topic)
 
 
     @docopt_cmd
