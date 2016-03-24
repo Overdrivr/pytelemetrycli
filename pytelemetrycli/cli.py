@@ -139,7 +139,8 @@ Prints X last received samples from <topic>.
 Usage: print <topic> [options]
 
 Options:
--a X, --amount X        Amount of samples to display [default: 1]
+-a, --all        Display all received samples under <topic>
+-l X, --limit X  Display X last received samples under <topic> [default: 1]
 
         """
         topic = arg['<topic>']
@@ -150,9 +151,12 @@ Options:
             return
 
         try:
-            amount = int(arg['--amount'])
+            if arg['--all']:
+                amount = 0 # 0 is understood as 'return all samples' by self.topics.samples()
+            else:
+                amount = int(arg['--limit'])
         except:
-            s = "Could not cast --amount = '{0}' to integer. Using 1.\n".format(arg['--amount'])
+            s = "Could not cast --limit = '{0}' to integer. Using 1.\n".format(arg['--limit'])
             self.stdout.write(s)
             logger.warn(s)
             amount = 1

@@ -156,25 +156,31 @@ def test_print():
 
     clear(outstream)
 
-    tlm.onecmd("print foo -a 3")
+    tlm.onecmd("print foo -l 3")
     tlm.runner.update()
     assert outstream.getvalue() == "2\n3\n4\n"
 
     clear(outstream)
 
-    tlm.onecmd("print foo --amount 3")
+    tlm.onecmd("print foo -l 2")
+    tlm.runner.update()
+    assert outstream.getvalue() == "3\n4\n"
+
+    clear(outstream)
+
+    tlm.onecmd("print foo --limit 3")
     tlm.runner.update()
     assert outstream.getvalue() == "2\n3\n4\n"
 
     clear(outstream)
 
-    tlm.onecmd("print foo --amount 10")
+    tlm.onecmd("print foo --limit 10")
     tlm.runner.update()
     assert outstream.getvalue() == "2\n3\n4\n"
 
     clear(outstream)
 
-    tlm.onecmd("print foo -a 0")
+    tlm.onecmd("print foo -a")
     tlm.runner.update()
     assert outstream.getvalue() == "2\n3\n4\n"
 
@@ -192,9 +198,9 @@ def test_print():
 
     clear(outstream)
 
-    tlm.onecmd("print foo -a 2.3")
+    tlm.onecmd("print foo -l 2.3")
     tlm.runner.update()
-    assert outstream.getvalue() == "Could not cast --amount = '2.3' to integer. Using 1.\n4\n"
+    assert outstream.getvalue() == "Could not cast --limit = '2.3' to integer. Using 1.\n4\n"
 
     clear(outstream)
 
@@ -351,7 +357,7 @@ def test_stats():
     outstream = io.StringIO()
     tlm = Application(transport=tr,stdout=outstream)
     tlm.runner._start_thread = MagicMock() # Mock _start_thread to avoid starting thread
-    
+
     tr.resetStats()
     tlm.runner.resetStats()
     tlm.telemetry.resetStats()
