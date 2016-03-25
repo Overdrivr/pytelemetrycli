@@ -85,6 +85,9 @@ class Application (cmd.Cmd):
         except:
             logger.warning("Module version : not found.")
 
+    def emptyline(self):
+        pass # Override default behavior to repeat last command if empty input
+
     @docopt_cmd
     def do_serial(self, arg):
         """
