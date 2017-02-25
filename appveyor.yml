@@ -28,6 +28,14 @@ environment:
       PYTHON_ARCH: "64"
       platform: x64
 
+    - MINICONDA: "C:\\Miniconda36"
+      PYTHON_ARCH: "32"
+      platform: x64
+
+    - MINICONDA: "C:\\Miniconda36"
+      PYTHON_ARCH: "64"
+      platform: x64
+
 init:
   - "ECHO %PYTHON_ARCH%"
   - "ECHO %PYTHON_VERSION%"
